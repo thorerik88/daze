@@ -1,5 +1,6 @@
 import NavMenu from './NavMenu';
 import NavAd from './NavAd';
+import Footer from './Footer';
 
 const Layout = ({ children }) => {
     return ( 
@@ -7,6 +8,7 @@ const Layout = ({ children }) => {
             <NavMenu />
             <NavAd />
             { children }
+            <Footer />
         </>
      );
 }

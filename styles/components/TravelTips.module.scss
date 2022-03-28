@@ -1,0 +1,19 @@
+@import '../global/variables.module.scss';
+
+.travelTips {
+  margin-top: 255px;
+
+  .image {
+    position: relative;
+    margin-bottom: 20px;
+
+    .imageTag {
+      color: white;
+      position: absolute;
+      padding: 0 10px;
+      left: 0;
+      top: 0;
+      background-color: $color-secondary;
+    }
+  }
+}
