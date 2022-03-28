@@ -1,11 +1,12 @@
 @import '../global/variables.module.scss';
 
 .travelTips {
-  margin-top: 255px;
+  margin-top: 350px;
 
   .image {
     position: relative;
     margin-bottom: 20px;
+    min-width: 100%;
 
     .imageTag {
       color: white;

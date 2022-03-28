@@ -6,7 +6,7 @@ import Hero from '../components/Hero';
 import TravelTips from '../components/TravelTips';
 import Container from '../components/Container';
 
-export default function Home(props) {
+export default function Home() {
   return (
     <div className={styles.container}>
       <Head title={'Home'} />

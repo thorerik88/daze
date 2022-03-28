@@ -12,6 +12,7 @@ const Hero = () => {
           priority='true'
           layout='fill'
           objectFit='cover' 
+          as=''
           alt="image showing a fancy hotel at nighttime"
         />
       </div>

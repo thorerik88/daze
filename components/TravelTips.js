@@ -9,8 +9,9 @@ const TravelTips = () => {
       <div className={styles.image}>
         <Image
           src={'/floyen1000.jpg'}
-          width={340}
-          height={200}
+          width={1000}
+          height={600}
+          responsive='true'
           alt='image of Fløyen in Bergen'
         />
         <span className={styles.imageTag}><h2>Fløyen</h2></span>
@@ -18,11 +19,12 @@ const TravelTips = () => {
       <div className={styles.image}>
         <Image
           src={'/harbor1000.jpg'}
-          width={340}
-          height={200}
+          width={1000}
+          height={600}
+          responsive='true'
           alt='image of the harbor in Bergen'
         />
-        <span className={styles.imageTag}><h2>Bergen Harbor</h2></span>
+        <span className={styles.imageTag}><h2>Fløyen</h2></span>
       </div>
     </div> 
   );
