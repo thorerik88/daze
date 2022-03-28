@@ -1,0 +1,31 @@
+@import '../global/variables.module.scss';
+
+.nav {
+  padding: 20px 10px;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    .navMenu {
+      display: flex;
+      
+      
+
+      .icons {
+        font-size: $fontAwesome-mobile;
+      }
+
+      .icons:first-child {
+        margin-right: 15px;
+      }
+    }
+  }
+}
+
+
+  
+
+
+

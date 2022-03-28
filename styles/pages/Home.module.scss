@@ -1,0 +1,14 @@
+@import '../global/variables.module.scss';
+
+.hero {
+  
+  .bgWrapper {
+    position: fixed;
+    top: 36px + 70px;
+    height: 60vh;
+    width: 100vw;
+    overflow: hidden;
+    z-index: -1;
+  }
+}
+

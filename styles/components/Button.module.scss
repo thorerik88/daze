@@ -1,0 +1,12 @@
+@import '../global/variables.module.scss';
+
+.button {
+  font-size: $text;
+  color: white;
+  background: $color-secondary;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  margin-top: 1.5rem;
+  text-align: center;
+}

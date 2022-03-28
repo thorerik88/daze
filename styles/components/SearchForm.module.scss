@@ -1,0 +1,37 @@
+@import '../global/variables.module.scss';
+
+.formWrapper {
+  margin: 50px auto;
+  padding: 30px 10px;
+  background-color: $color-bg;
+  width: 90%;
+  border-radius: 10px;
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: auto;
+
+
+    .inputWrap {
+      position: relative;
+
+      .icon {
+        color: #808080;
+        position: absolute;
+        top: 8px;
+        left: 10px;
+        font-size: $fontAwesome-mobile;
+      }
+
+      input {
+        font-size: $sub-heading;
+        padding-left: 45px;
+        height: 40px;
+        width: 100%;
+      }
+    }
+  }
+}
+
