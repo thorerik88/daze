@@ -1,6 +1,6 @@
-import styles from '../styles/components/Footer.module.scss';
-import { footerLogo } from '../constants/Images';
-import Container from './Container';
+import styles from '../../styles/components/Footer.module.scss';
+import { footerLogo } from '../../constants/Images';
+import Container from '../layout/Container';
 
 import Image from 'next/image';
 

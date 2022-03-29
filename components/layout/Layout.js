@@ -1,6 +1,6 @@
-import NavMenu from './NavMenu';
-import NavAd from './NavAd';
-import Footer from './Footer';
+import NavMenu from '../nav/NavMenu';
+import NavAd from '../nav/NavAd';
+import Footer from '../footer/Footer';
 
 const Layout = ({ children }) => {
     return ( 

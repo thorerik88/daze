@@ -1,4 +1,3 @@
-import layout from '../styles/global/layout.module.scss';
 import styles from '../styles/components/TravelTips.module.scss';
 import Image from 'next/image';
 

@@ -1,8 +1,8 @@
-import styles from '../styles/components/SearchForm.module.scss';
+import styles from '../../styles/components/SearchForm.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBed } from '@fortawesome/free-solid-svg-icons';
 
-import Button from '../components/Button';
+import Button from '../layout/Button';
 
 const SearchForm = () => {
 

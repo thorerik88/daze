@@ -2,6 +2,7 @@
 
 .nav {
   padding: 20px 25px;
+  position: relative;
 
   .container {
     display: flex;
@@ -10,14 +11,12 @@
 
     .navMenu {
       display: flex;
-      
-      
 
-      .icons {
+      .admin, .mobileMenu {
         font-size: $fontAwesome-mobile;
       }
 
-      .icons:first-child {
+      .admin {
         margin-right: 15px;
       }
     }

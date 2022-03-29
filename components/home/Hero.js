@@ -1,7 +1,7 @@
-import styles from '../styles/pages/Home.module.scss';
+import styles from '../../styles/pages/Home.module.scss';
 
 import Image from 'next/image';
-import SearchForm from '../components/SearchForm';
+import SearchForm from './SearchForm';
 
 const Hero = () => {
   return ( 
@@ -10,15 +10,15 @@ const Hero = () => {
         <Image 
           src={'/fancy1000.jpg'} 
           priority='true'
+          // width={1000}
+          // height={685}
+          responsive='true'
           layout='fill'
           objectFit='cover' 
-          as=''
           alt="image showing a fancy hotel at nighttime"
         />
       </div>
-      
         <SearchForm />
-      
     </div>
    );
 }
