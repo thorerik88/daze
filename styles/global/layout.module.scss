@@ -1,6 +1,7 @@
 @import '../global/variables.module.scss';
 
 .container {
+  display: flex;
   max-width: 90%;
   margin: 0 auto;
 }
