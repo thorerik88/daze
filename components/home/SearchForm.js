@@ -13,7 +13,7 @@ const SearchForm = () => {
           <FontAwesomeIcon className={styles.icon} icon={faBed} />
           <input type='text' placeholder="Establishment..."/>
         </div>
-        <Button value={'Search'} type='button'/>
+        <Button value={'Search'} buttonType={'submit'} type='button'/>
       </form>
     </div>
    );

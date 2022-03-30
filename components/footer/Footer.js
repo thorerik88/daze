@@ -3,6 +3,7 @@ import { footerLogo } from '../../constants/Images';
 import Container from '../layout/Container';
 
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Footer = () => {
   return ( 
@@ -10,15 +11,37 @@ const Footer = () => {
       <footer className={styles.footer}>
         <Image className={styles.logo} src={'/logo-nav.svg'} width={footerLogo.width} height={footerLogo.height} alt="Holidaze logo"/>
         <ul className={styles.menu}>
-          <li>Home</li>
-          <li>Hotels</li>
-          <li>Contact Us</li>
-          <li>Admin</li>
+          <li>
+            <Link href={'/'}>
+              <a>Home</a>
+            </Link>
+          </li>
+          <li>
+            <Link href={'/establishments'}>
+              <a>Establishments</a>
+            </Link>
+          </li>
+          <li>
+            <Link href={'/contact-us'}>
+              <a>Contact Us</a>
+            </Link>
+          </li>
+          <li>
+            <Link href={'/admin'}>
+              <a>Admin</a>
+            </Link>
+          </li>
         </ul>
         <ul className={styles.social}>
-          <li>Facebook</li>
-          <li>Twitter</li>
-          <li>Tripadvisor</li>
+          <li>
+            <a>Facebook</a>
+          </li>
+          <li>
+            <a>Twitter</a>
+          </li>
+          <li>
+            <a>Tripadvisor</a>
+          </li>
         </ul>
       </footer>
     </Container>

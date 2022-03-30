@@ -1,12 +1,49 @@
 @import '../global/variables.module.scss';
 
-.button {
-  font-size: $text;
+.book, .submit {
   color: white;
   background: $color-secondary;
-  padding: 12px;
-  border-radius: 10px;
-  border: none;
   margin-top: 1.5rem;
   text-align: center;
+  padding: 12px;
+}
+
+.submit {
+  font-size: $text;
+  border-radius: 10px;
+  border: none;
+}
+
+.book {
+  display: flex;
+  flex-direction: column;
+  font-size: $main-heading;
+  font-weight: 700;
+  border: 5px solid $color-primary;
+  border-radius: 40px 0 0 40px;
+
+  .buttonWrapper {
+    display: flex;
+    align-items: center;
+    
+    .button {
+      flex: 1;
+    }
+
+    .iconBg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      float: left;
+      background: $color-primary;
+      border-radius: 100%;
+      width: 40px;
+      height: 40px;
+  
+      .icon {
+        font-size: $fontAwesome-btnIcon;
+        margin-bottom: 3px;
+      }
+    }
+  }
 }

@@ -18,6 +18,7 @@ ul {
   font-family: 'Nunito', sans-serif;
 }
 
+
 h1 {
   margin-top: 30px;
   font-size: $main-heading;
@@ -29,6 +30,11 @@ h2 {
 
 ul {
   list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 * {

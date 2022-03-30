@@ -1,0 +1,55 @@
+@import '../global/variables.module.scss';
+
+.establishments {
+  position: relative;
+
+  .establishment {
+    border-top: 1px solid #808080;
+    border-bottom: 1px solid #808080;
+    padding: 20px 0;
+
+    .textBox {
+      display: flex;
+      flex-direction: column;
+      padding: 0 10px;
+
+      .heading {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .text {
+        display: flex;
+        justify-content: space-between;
+        
+
+        .address {
+          
+          .addressIcon {
+            display: flex;
+
+            p {
+              margin-left: 5px;
+            }
+          }
+
+          p {
+            margin: 0;
+          }
+        }
+
+        .options {
+          color: $color-green;
+          list-style-type: initial;
+        }
+      }
+
+      .button {
+        display: inline-block;
+        width: 50%;
+        margin-left: auto;
+        margin-right: 0;
+      }
+    }
+  }
+}

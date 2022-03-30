@@ -1,28 +1,30 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faBars } from '@fortawesome/free-solid-svg-icons';
-import { useState, createContext, useEffect } from "react";
+import { useState, createContext } from "react";
+import Image from 'next/image';
+import Link from 'next/link';
 
 import styles from '../../styles/components/Navbar.module.scss';
-import Image from 'next/image';
+
 
 import { navLogo } from '../../constants/Images';
 import { Container } from "react-bootstrap";
 import MobileMenu from "./MobileMenu";
 
 export const MobileMenuContext = createContext();
-export const AdminMenuContext = createContext();
+export const CloseMenuContext = createContext();
 
 const mobileContent = [
-  {id: 1, name: 'Home'},
-  {id: 2, name: 'Establishment'},
-  {id: 3, name: 'Contact Us'}
+  {id: 1, name: 'Home', href: '/'},
+  {id: 2, name: 'Establishments', href: 'establishments'},
+  {id: 3, name: 'Contact Us', href: 'contact-us'}
 ];
 
 const adminContent = [
-  {id: 1, name: 'Enquiries'},
-  {id: 2, name: 'Messages'},
-  {id: 3, name: 'New Establishment'},
-  {id: 4, name: 'Logout'}
+  {id: 1, name: 'Enquiries', href: 'enquiries'},
+  {id: 2, name: 'Messages', href: 'messages'},
+  {id: 3, name: 'New Establishment', href: 'new-establishment'},
+  {id: 4, name: 'Logout', href: 'logout'}
 ];
 
 const NavMenu = () => {
@@ -31,7 +33,9 @@ const NavMenu = () => {
   const [toggleType, setToggleType] = useState(undefined);
   const [dataset, setDataset] = useState([]);
   
-  const handleClick = (event, type) => {
+  // set which icon and what dataset to send to mobile component
+      //ADMIN ICON
+  const handleClick = (type) => {
     if (type === 'admin' && toggle === true) {
       setToggle(false);
     } else if (type === 'admin' && toggle === false) {
@@ -39,7 +43,7 @@ const NavMenu = () => {
       setDataset(adminContent);
       setToggleType(type);
     }
-
+      //MOBILEMENU ICON
     if (type === 'mobileMenu' && toggle === true) {
       setToggle(false);
     } else if (type === 'mobileMenu' && toggle === false) {
@@ -52,14 +56,18 @@ const NavMenu = () => {
   return ( 
     <nav className={styles.nav}>
       <Container className={styles.container}>
-        <Image className={styles.logo} src={'/logo-nav.svg'} width={navLogo.width} height={navLogo.height} alt="Holidaze logo"/>
+        <Link href={'/'}>
+          <a><Image className={styles.logo} src={'/logo-nav.svg'} width={navLogo.width} height={navLogo.height} alt="Holidaze logo"/></a>
+        </Link>
         <div className={styles.navMenu}>
-          <FontAwesomeIcon data='admin' className={styles.admin} onClick={(event) => handleClick(event, 'admin')} icon={faUser} />
-          <FontAwesomeIcon className={styles.mobileMenu} onClick={(event) => handleClick(event, 'mobileMenu')} icon={faBars} />
+          <FontAwesomeIcon data='admin' className={styles.admin} onClick={() => handleClick('admin')} icon={faUser} />
+          <FontAwesomeIcon className={styles.mobileMenu} onClick={() => handleClick('mobileMenu')} icon={faBars} />
         </div>
       </Container>
       <MobileMenuContext.Provider value={{ toggle, toggleType }}>
-        <MobileMenu value={dataset} />
+        <CloseMenuContext.Provider value={{ setToggle }}>
+          <MobileMenu value={dataset} />
+        </CloseMenuContext.Provider>
       </MobileMenuContext.Provider>
     </nav>
   );
