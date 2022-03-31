@@ -12,9 +12,7 @@ export default function Home() {
       <Hero />
       <Container>
         <TravelTips />
-      </Container>
-
-      
+      </Container>      
     </div>
   )
 }

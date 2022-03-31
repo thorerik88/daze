@@ -1,0 +1,57 @@
+@import '../global/variables.module.scss';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 60px;
+  
+
+
+  .heading, .item {
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+
+    p {
+      display: inline-block;
+      width: 50%;
+      padding: 5px;
+      margin: 0;
+      border: 1px solid $color-primary;
+    }
+
+    p:nth-of-type(even) {
+      border-left: none;
+      border-right: none;
+      width: 20%;
+    }
+
+    p:last-of-type {
+      width: 30%;
+    }
+  }
+
+  .heading {
+    background: $color-primary;
+    color: white;
+  }
+
+  .item:nth-of-type(odd) {
+    background-color: $color-bg;
+  }
+
+  .item:not(:first-of-type) {
+    
+    p {
+      border-bottom: none;
+    }
+  }
+
+  .item:last-of-type {
+
+    p {
+      border-bottom: 1px solid $color-primary;
+    }
+  }
+}
