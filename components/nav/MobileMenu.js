@@ -12,7 +12,7 @@ const MobileMenu = (listObject) => {
   let listItems = listObject.value;  
 
   // open mobile menu based on icon type
-  const { toggle, toggleType } = useContext(MobileMenuContext);
+  const { toggle } = useContext(MobileMenuContext);
   
   // close mobile menu's
   const { setToggle } = useContext(CloseMenuContext);
@@ -26,12 +26,7 @@ const MobileMenu = (listObject) => {
   }
 
   return ( 
-      <div className={toggle && toggleType === 'admin' 
-          ? styles.showAdmin : styles.hideAdmin 
-          | toggle && toggleType === 'mobileMenu' 
-          ? styles.showMobile : styles.hideMobile}
-          onClick={changePageClick}
-          >
+      <div className={toggle ? styles.showMobile : styles.hideMobile}onClick={changePageClick} >
         <div className={styles.mobileMenu}>
           <div className={styles.wrapper}>
             <ul className={styles.menu}>
@@ -39,9 +34,8 @@ const MobileMenu = (listObject) => {
               return <li key={item.id}>
                       <Link href={`${item.href}`}>
                         <a>{item.name}</a>
-                      </Link></li>
-                      
-            })}
+                      </Link></li>  
+                  })}
             </ul>
               <FontAwesomeIcon className={styles.closeBtn} onClick={() => setToggle(false)} icon={faClose} />
           </div>
