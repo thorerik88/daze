@@ -33,6 +33,31 @@ h2 {
   font-size: $sub-heading;
 }
 
+input, textarea {
+  margin-bottom: 20px;
+  background: $color-bg;
+  border: none;
+  border-bottom: 1px solid black;
+  padding: 10px 6px;
+  font-size: 17px;
+}
+
+input::placeholder, textarea::placeholder {
+  color: $color-primary;
+}
+
+input {
+  height: 35px;
+}
+
+textarea {
+  margin: 0 0 10px;
+}
+
+input:focus::placeholder, textarea:focus::placeholder {
+  color: transparent;
+}
+
 ul {
   list-style: none;
 }
