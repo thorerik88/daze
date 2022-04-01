@@ -12,11 +12,7 @@ import { Container } from "react-bootstrap";
 import MobileMenu from "./MobileMenu";
 import { visitorContent, adminContent } from '../../constants/MenuContent'
 import { Auth } from '../../constants/Auth';
-
-export const MobileMenuContext = createContext();
-export const CloseMenuContext = createContext();
-
-
+import { MobileMenuContext, CloseMenuContext } from '../../context/Context';
 
 const NavMenu = () => {
 

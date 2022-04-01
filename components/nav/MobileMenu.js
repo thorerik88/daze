@@ -1,5 +1,5 @@
 import styles from '../../styles/components/MobileMenu.module.scss';
-import { CloseMenuContext, MobileMenuContext } from './NavMenu';
+import { CloseMenuContext, MobileMenuContext } from '../../context/Context';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from '@fortawesome/free-solid-svg-icons';

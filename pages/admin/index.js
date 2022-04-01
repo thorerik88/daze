@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLock } from '@fortawesome/free-solid-svg-icons';
+import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 
 import Container from "../../components/layout/Container";
 import styles from '../../styles/components/Admin.module.scss';
@@ -16,7 +16,7 @@ const Admin = () => {
         <div className={styles.wrapper}>
           <div className={styles.inputs}>
             <div className={styles.username}>
-              <FontAwesomeIcon icon={faLock} />
+              <FontAwesomeIcon icon={faUser} />
               <input type='text' name='name' placeholder='Username' />
             </div>
             <div className={styles.password}>
