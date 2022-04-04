@@ -6,7 +6,7 @@ import Container from "../../components/layout/Container";
 import styles from '../../styles/components/Admin.module.scss';
 import Button from '../../components/layout/Button';
 import Head from '../../components/layout/Head';
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { FormValidation } from "../../constants/FormValidation";
 import { apiCall } from "../../api/ApiCall";
 
@@ -15,21 +15,25 @@ import { apiCall } from "../../api/ApiCall";
 const Admin = () => {
 
   const [message, setMessage] = useState('');
+  const [callType, setCallType] = useState('');
 
   const {register, handleSubmit} = useForm();
+
   const loginVal = (e) => {
-    const username = e.username;
-    const password = e.password;
+    
+    let username = e.username;
+    let password = e.password;
+
     let checkUsername = FormValidation(username, 'string');
     let checkPassword = FormValidation(password, 'password');
-    
+
     if (!checkUsername || !checkPassword) {
       setMessage('Min. 8 chars long please')
     } else {
       setMessage('');
-      apiCall(username, password, 'POST');
+      setCallType('POST');
+      apiCall(username, password, callType);
     }
-
   }
 
   
@@ -47,11 +51,11 @@ const Admin = () => {
             <div className={styles.inputs}>
               <div className={styles.username}>
                 <FontAwesomeIcon icon={faUser} />
-                <input type='text' name='username' value='admin' placeholder='Username' {...register('username')}/>
+                <input type='text' name='username' placeholder='Username' {...register('username')}/>
               </div>
               <div className={styles.password}>
                 <FontAwesomeIcon icon={faLock} />
-                <input type='password' name='password' value='Admin1234' placeholder='Password' {...register('password')} />
+                <input type='password' name='password' placeholder='Password' {...register('password')} />
               </div>
             </div>
             <Button className={styles.button} value={'Login'} buttonType={'submit'} />

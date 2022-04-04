@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { BASE_URL, ADMIN_URL } from "./api"
 
 export const apiCall = async (username, password, callType) => {
@@ -11,7 +12,7 @@ export const apiCall = async (username, password, callType) => {
   }
 
   try {
-    let response = await fetch(BASE_URL + ADMIN_URL, data);
+    let response = await fetch(BASE_URL + ADMIN_URL);
     let results = await response.json();
     console.log(results)
   } catch(error) {
