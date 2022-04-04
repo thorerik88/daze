@@ -11,7 +11,7 @@ $fontAwesome-mobile: 20px;
 html,
 body,
 ul,
-input,
+input:not(input[type='submit']),
 textarea {
   // font-size: $text;
   color: $color-primary;
@@ -33,7 +33,7 @@ h2 {
   font-size: $sub-heading;
 }
 
-input, textarea {
+input:not(input[type='submit']), textarea {
   margin-bottom: 20px;
   background: $color-bg;
   border: none;
@@ -42,11 +42,11 @@ input, textarea {
   font-size: 17px;
 }
 
-input::placeholder, textarea::placeholder {
+input:not(input[type='submit'])::placeholder, textarea::placeholder {
   color: $color-primary;
 }
 
-input {
+input:not(input[type='submit']) {
   height: 35px;
 }
 
@@ -54,8 +54,16 @@ textarea {
   margin: 0 0 10px;
 }
 
-input:focus::placeholder, textarea:focus::placeholder {
+input:not(input[type='submit']):focus::placeholder, textarea:focus::placeholder {
   color: transparent;
+}
+
+input[type='submit'] {
+  background: $color-secondary;
+  border: none;
+  color: white;
+  font-size: 17px;
+  font-family: 'Nunito';
 }
 
 ul {

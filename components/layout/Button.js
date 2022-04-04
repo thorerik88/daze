@@ -18,7 +18,7 @@ const Button = ({ value, buttonType, icon }) => {
         </div>
         :
         <div>
-          <a>{value}</a>
+          <input type={buttonType} value={value} />
         </div>
       }
     </div>
