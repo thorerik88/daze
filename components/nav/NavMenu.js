@@ -30,7 +30,6 @@ const NavMenu = () => {
       if (item.id !== 4) {
         newArray.push(item)
       }
-      console.log(newArray)
       contentList = newArray.concat(adminContent);
     })
   }
