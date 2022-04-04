@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 export const save = (key, value) => {
   const json = JSON.stringify(value);
   localStorage.setItem(key, json);

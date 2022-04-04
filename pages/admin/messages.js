@@ -2,17 +2,16 @@ import Container from "../../components/layout/Container";
 import Head from "../../components/layout/Head";
 import MessageItems from "../../components/MessageItems";
 import TravelTips from "../../components/TravelTips";
+import { load } from '../../storage/storage';
 
-import { useContext, useEffect } from 'react';
-import { AuthContext } from "../../context/Context";
+import { useEffect } from 'react';
+import Router from 'next/router';
 
 const Messages = () => {
 
-  const { auth } = useContext(AuthContext);
-
   useEffect(() => {
-    if (!auth) {
-      window.location.href = '/';
+    if (!load('token')) {
+      Router.push('/')
     }
   })
   

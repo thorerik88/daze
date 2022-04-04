@@ -1,21 +1,21 @@
 
 
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Link from 'next/link';
 
 import Container from "../../components/layout/Container";
 import Head from "../../components/layout/Head";
 import MessageItems from "../../components/MessageItems";
 import TravelTips from "../../components/TravelTips";
-import { AuthContext } from '../../context/Context';
+import { load } from '../../storage/storage';
 
 const Enquiries = () => {
 
-  const { auth } = useContext(AuthContext);
-
-  if (!auth) {
-    window.location.href = '/';
-  }
+  useEffect(() => {
+    if (!load('token')) {
+      Router.push('/')
+    }
+  })
 
   return ( 
     <>
