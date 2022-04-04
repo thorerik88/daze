@@ -6,20 +6,20 @@ import Container from "../../components/layout/Container";
 import styles from '../../styles/components/Admin.module.scss';
 import Button from '../../components/layout/Button';
 import Head from '../../components/layout/Head';
-import { useState, useRef, useEffect } from "react";
+import { useState } from 'react';
 import { FormValidation } from "../../constants/FormValidation";
 import { apiCall } from "../../api/ApiCall";
-
-
+import { save } from "../../storage/storage";
 
 const Admin = () => {
 
   const [message, setMessage] = useState('');
+  const [loginSuccess, setLoginSuccess] = useState(false);
   const [callType, setCallType] = useState('');
 
   const {register, handleSubmit} = useForm();
 
-  const loginVal = (e) => {
+  const loginVal = async (e) => {
     
     let username = e.username;
     let password = e.password;
@@ -28,12 +28,26 @@ const Admin = () => {
     let checkPassword = FormValidation(password, 'password');
 
     if (!checkUsername || !checkPassword) {
-      setMessage('Min. 8 chars long please')
+      return setMessage('Please type username and password'), setLoginSuccess(false)
     } else {
-      setMessage('');
-      setCallType('POST');
-      apiCall(username, password, callType);
+      const loginResult = await apiCall(username, password);
+      
+      console.log(loginResult)
+
+      if (loginResult.error) {
+        setMessage('Wrong username and/or password')
+        setLoginSuccess(false);
+      } else {
+        setMessage('You are now logged in');
+        setLoginSuccess(true);
+        save('token', loginResult.jwt);
+        window.location.href = '/';
+      }
     }
+    
+
+    
+
   }
 
   
@@ -59,7 +73,7 @@ const Admin = () => {
               </div>
             </div>
             <Button className={styles.button} value={'Login'} buttonType={'submit'} />
-            <div className={styles.loginMessage}>{message}</div>
+            <div className={loginSuccess ? styles.success : styles.error}>{message}</div>
           </div>
         </form>
       </Container>

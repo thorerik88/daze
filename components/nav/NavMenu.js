@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from '@fortawesome/free-solid-svg-icons';
-import { useState, createContext } from "react";
+import { useState, createContext, useContext, useEffect } from "react";
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -11,18 +11,30 @@ import { navLogo } from '../../constants/Images';
 import { Container } from "react-bootstrap";
 import MobileMenu from "./MobileMenu";
 import { visitorContent, adminContent } from '../../constants/MenuContent'
-import { Auth } from '../../constants/Auth';
-import { MobileMenuContext, CloseMenuContext } from '../../context/Context';
+import { MobileMenuContext, CloseMenuContext, AuthContext } from '../../context/Context';
+import { load } from "../../storage/storage";
 
 const NavMenu = () => {
+
+  const { auth, setAuth } = useContext( AuthContext );
 
   const [toggle, setToggle] = useState(false);
   const [dataset, setDataset] = useState([]);
   
+  // check if user is logged in
+  useEffect(() => {
+    if (load('token')) {
+      setAuth(true)
+    } else {
+      console.log('not logged in')
+    }
+  }, [])
+
+
   let contentList = [];
   
   // set which menu to display, based on Auth
-  if (!Auth) {
+  if (!auth) {
     contentList = visitorContent;
   } else {
     let newArray = [];
@@ -39,10 +51,10 @@ const NavMenu = () => {
     if (toggle) {
       setToggle(false)
     } else {
-      if (!Auth) {
+      if (!auth) {
         setDataset(visitorContent)
         setToggle(true);
-      } else if (Auth) {
+      } else if (auth) {
         let newArray = [];
 
         visitorContent.map(item => {
@@ -73,6 +85,7 @@ const NavMenu = () => {
           <MobileMenu value={dataset} />
         </CloseMenuContext.Provider>
       </MobileMenuContext.Provider>
+      {auth ? <span>Logged in</span> : ''}
     </nav>
   );
 }

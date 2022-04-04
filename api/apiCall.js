@@ -1,22 +1,33 @@
-import { useState } from "react";
 import { BASE_URL, ADMIN_URL } from "./api"
 
-export const apiCall = async (username, password, callType) => {
+export const apiCall = async (username, password) => {
+  const url = BASE_URL + ADMIN_URL;
 
-  let data = {
-    method: callType,
-    headers: {
-      "identifier": username,
-      'password': password,
-    }
+  const body = {
+    identifier: username,
+    password: password,
   }
 
   try {
-    let response = await fetch(BASE_URL + ADMIN_URL);
-    let results = await response.json();
-    console.log(results)
-  } catch(error) {
-    console.log(error)
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    })
+
+
+    const data = await response.json();
+    
+    return data;
+
+    
+
   }
-  
+  catch(error) {
+    console.log(error);
+    return null;
+  }
 }

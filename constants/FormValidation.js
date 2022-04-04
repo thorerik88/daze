@@ -7,10 +7,9 @@ export const FormValidation = (value, type) => {
     regEx = /^[A-Za-z]\w{7,14}$/;
   }
 
-  let validate = false;
-
   if (value.match(regEx)) {
-    validate = true
+    return true
+  } else {
+    return false
   }
-  return validate
 }

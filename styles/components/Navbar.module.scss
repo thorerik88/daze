@@ -12,12 +12,8 @@
     .navMenu {
       display: flex;
 
-      .admin, .mobileMenu {
+      .mobileMenu {
         font-size: $fontAwesome-mobile;
-      }
-
-      .admin {
-        margin-right: 15px;
       }
     }
   }

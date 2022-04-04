@@ -4,12 +4,20 @@ config.autoAddCss = false;
 
 import '../styles/global/globals.scss'
 import Layout from '../components/layout/Layout';
+import { AuthContext } from '../context/Context';
+import { useState } from "react";
+import { load } from "../storage/storage";
 
 function MyApp({ Component, pageProps }) {
+
+  const [auth, setAuth] = useState(false);
+
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <AuthContext.Provider value={{auth, setAuth}}>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </AuthContext.Provider>
   )
 }
 

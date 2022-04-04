@@ -2,20 +2,32 @@ import styles from '../../styles/components/Footer.module.scss';
 import { footerLogo } from '../../constants/Images';
 import Container from '../layout/Container';
 import { visitorContent, adminContent } from '../../constants/MenuContent';
-import { Auth } from '../../constants/Auth';
+import { AuthContext } from '../../context/Context';
+import { load } from '../../storage/storage';
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useContext, useEffect } from 'react';
 
 
 
 const Footer = () => {
 
+  const { auth, setAuth } = useContext(AuthContext);
+
+  // check if user is logged in
+  useEffect(() => {
+    if (load('token')) {
+      setAuth(true)
+    } else {
+      setAuth(false)
+    }
+  }, [])
+
   let contentList = [];
   
   // set which menu to display, based on Auth
-  if (!Auth) {
+  if (!auth) {
     contentList = visitorContent;
   } else {
     let newArray = [];

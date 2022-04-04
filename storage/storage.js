@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 export const save = (key, value) => {
   const json = JSON.stringify(value);
   localStorage.setItem(key, json);
@@ -14,7 +16,7 @@ export const load = (key)=> {
 }
 
 export const logOut = () => {
-  storage.remove('token');
+    localStorage.remove('token');
 }
 
 export const remove = (key) => {

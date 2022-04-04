@@ -31,11 +31,16 @@
       align-items: center;
     }
 
-    
-
-    .loginMessage {
+    .success, .error {
       padding-top: 1rem;
       text-align: center;
+    }
+
+    .success {
+      color: $color-green;
+    }
+
+    .error {
       color: $color-secondary;
     }
   }
