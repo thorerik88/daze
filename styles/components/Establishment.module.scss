@@ -52,4 +52,11 @@
       }
     }
   }
+  .establishment:first-of-type {
+    border-top: none;
+  }
+
+  .establishment:last-of-type {
+    border-bottom: none;
+  }
 }

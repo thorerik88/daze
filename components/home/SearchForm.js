@@ -1,4 +1,4 @@
-import styles from '../../styles/components/SearchForm.module.scss';
+import styles from '../../styles/pages/SearchForm.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBed } from '@fortawesome/free-solid-svg-icons';
 

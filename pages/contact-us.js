@@ -9,12 +9,14 @@ const Contact = () => {
     <>
       <Head title={'Contact Us'} />
       <Container>
+        <div className={styles.wrapper}>
         <h1>Contact Us</h1>
+
         <form className={styles.form} name='contact' type='submit'>
           <div className={styles.heading}>
             <h2>Contact form</h2>
           </div>
-          <div className={styles.wrapper}>
+          <div className={styles.contentWrapper}>
             <input type='text' name='name' placeholder='Your name' />
             <input type='email' name='email' placeholder='Your email' />
             <input type='text' name='subject' placeholder='Subject' />
@@ -22,6 +24,7 @@ const Contact = () => {
             <Button value={'Send'} buttonType={'submit'}/>
           </div>
         </form>
+        </div>
       </Container>
     </>
    );

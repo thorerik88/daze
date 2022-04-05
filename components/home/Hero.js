@@ -4,14 +4,13 @@ import Image from 'next/image';
 import SearchForm from './SearchForm';
 
 const Hero = () => {
+
   return ( 
     <div className={styles.hero}>
       <div className={styles.bgWrapper}>
         <Image 
-          src={'/fancy1000.jpg'} 
+          src={'/fancy1800.jpg'} 
           priority='true'
-          // width={1000}
-          // height={685}
           responsive='true'
           layout='fill'
           objectFit='cover' 

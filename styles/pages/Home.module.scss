@@ -1,12 +1,13 @@
 @import '../global/variables.module.scss';
 
 .hero {
-  margin-bottom: 330px;
+  margin-bottom: 210px;
   
   .bgWrapper {
     position: absolute;
     top: 36px + 70px;
     height: 60vh;
+    max-height: 440px;
     width: 100vw;
     overflow: hidden;
     z-index: -1;

@@ -26,7 +26,7 @@ const NavMenu = () => {
     if (load('token')) {
       setAuth(true)
     } else {
-      console.log('not logged in')
+      setAuth(false)
     }
   }, [])
 

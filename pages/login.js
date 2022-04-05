@@ -50,26 +50,29 @@ const Login = () => {
     <>
       <Head title={'Admin'} />
       <Container>
-        <form className={styles.form} name='login' onSubmit={handleSubmit(loginVal)}>
-          <div className={styles.heading}>
-          <FontAwesomeIcon icon={faLock} />
-            <h2>ADMIN LOGIN</h2>
-          </div>
-          <div className={styles.wrapper}>
-            <div className={styles.inputs}>
-              <div className={styles.username}>
-                <FontAwesomeIcon icon={faUser} />
-                <input type='text' name='username' placeholder='Username' {...register('username')}/>
-              </div>
-              <div className={styles.password}>
-                <FontAwesomeIcon icon={faLock} />
-                <input type='password' name='password' placeholder='Password' {...register('password')} />
-              </div>
+        <div className={styles.wrapper}>
+          <h1>Admin</h1>
+          <form className={styles.form} name='login' onSubmit={handleSubmit(loginVal)}>
+            <div className={styles.heading}>
+            <FontAwesomeIcon icon={faLock} />
+              <h2>ADMIN LOGIN</h2>
             </div>
-            <Button className={styles.button} value={'Login'} buttonType={'submit'} />
-            <div className={loginSuccess ? styles.success : styles.error}>{message}</div>
-          </div>
-        </form>
+            <div className={styles.formWrapper}>
+              <div className={styles.inputs}>
+                <div className={styles.username}>
+                  <FontAwesomeIcon icon={faUser} />
+                  <input type='text' name='username' placeholder='Username' {...register('username')}/>
+                </div>
+                <div className={styles.password}>
+                  <FontAwesomeIcon icon={faLock} />
+                  <input type='password' name='password' placeholder='Password' {...register('password')} />
+                </div>
+              </div>
+              <Button className={styles.button} value={'Login'} buttonType={'submit'} />
+              <div className={loginSuccess ? styles.success : styles.error}>{message}</div>
+            </div>
+          </form>
+        </div>
       </Container>
     </>
    );

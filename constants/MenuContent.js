@@ -8,5 +8,5 @@ export const visitorContent = [
 
 export const adminContent = [
   {id: 5, name: 'Admin', href: '/admin'},
-  {id: 6, name: 'Logout', href: '/logout'},
+  {id: 6, name: 'Logout', href: '/admin/logout'},
 ];

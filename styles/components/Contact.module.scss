@@ -1,40 +1,44 @@
 @import '../global/variables.module.scss';
 
-.form {
+.wrapper {
+  max-width: 440px;
   margin: 0 auto;
-  background: $color-bg;
-  border: none;
-  border-radius: 10px;
-  max-width: 420px;
 
-  .heading {
-    background: $color-primary;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    border-radius: 10px 10px 0 0;
-
-    h2 {
-      font-weight: 400;
-      margin: 0;
+  .form {
+    background: $color-bg;
+    border: none;
+    border-radius: 10px;
+  
+    .heading {
+      background: $color-primary;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      border-radius: 10px 10px 0 0;
+  
+      h2 {
+        font-weight: 400;
+        margin: 0;
+      }
     }
-  }
-
-  .wrapper {
-    display: flex;
-    margin: 0 auto;
-    flex-direction: column;
-    padding: 40px 0;
-    max-width: 80%;
-
-    label {
-      margin: 20px 0 0;
+  
+    .contentWrapper {
+      display: flex;
+      margin: 0 auto;
+      flex-direction: column;
+      padding: 40px 0;
+      max-width: 80%;
+  
+      label {
+        margin: 20px 0 0;
+      }
+  
+      label:first-of-type {
+        margin: 0;
+      }
+  
+      
     }
-
-    label:first-of-type {
-      margin: 0;
-    }
-
-    
   }
 }
+
