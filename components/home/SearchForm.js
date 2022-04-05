@@ -25,7 +25,7 @@ const SearchForm = ({ establishments }) => {
 }
 export default SearchForm;
 
-const getStaticProps = async () => {
+export const getStaticProps = async () => {
   const res = await fetch(BASE_URL + ESTABLISHMENT_URL);
   const establishments = await res.json();
 
