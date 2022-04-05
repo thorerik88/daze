@@ -60,7 +60,7 @@ const NavMenu = () => {
         <Link href={'/'}>
           <div className={styles.brandWrapper}>
             <a className={styles.logo}><Image src={'/logo-nav.svg'} width={navLogo.width} height={navLogo.height} alt="Holidaze logo"/></a>
-            {auth ? <span>Logged in</span> : ''}
+            {auth ? <span>Logged in</span> : <span>At your service</span>}
           </div>
         </Link>
         <div className={styles.navMenu}>

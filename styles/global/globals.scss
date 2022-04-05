@@ -13,7 +13,7 @@ body,
 ul,
 input:not(input[type='submit']),
 textarea {
-  // font-size: $text;
+  font-size: $text;
   color: $color-primary;
   padding: 0;
   margin: 0;
@@ -27,10 +27,18 @@ body {
 h1 {
   margin: 40px 0;
   font-size: $main-heading;
+
+  @include tablet-landscape {
+    font-size: $main-heading * 1.5;
+  }
 }
 
 h2 {
   font-size: $sub-heading;
+
+  @include tablet-landscape {
+    font-size: $sub-heading * 1.5;
+  }
 }
 
 input:not(input[type='submit']), textarea {
@@ -39,7 +47,6 @@ input:not(input[type='submit']), textarea {
   border: none;
   border-bottom: 1px solid black;
   padding: 10px 6px;
-  font-size: 17px;
 }
 
 input:not(input[type='submit'])::placeholder, textarea::placeholder {
@@ -62,7 +69,6 @@ input[type='submit'] {
   background: $color-secondary;
   border: none;
   color: white;
-  font-size: 17px;
   font-family: 'Nunito';
 }
 
@@ -73,6 +79,14 @@ ul {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+p, a, span, input {
+  font-size: $text;
+
+  @include tablet-landscape {
+    font-size: $text * 1.05;
+  }
 }
 
 * {

@@ -2,7 +2,11 @@
 
 .container {
   max-width: 90%;
-  margin: 20px auto;
+  margin: 20px auto 40px;
+
+  @include tablet-landscape {
+    max-width: 950px;
+  }
 }
 
 .button {

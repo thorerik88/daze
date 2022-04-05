@@ -9,6 +9,11 @@
     justify-content: space-between;
   }
 
+  @include desktop-small {
+    margin: 0 auto;
+    max-width: 1500px;
+  }
+
   .container {
     display: flex;
     align-items: center;
@@ -18,6 +23,10 @@
       position: relative;
       display: flex;
       flex-direction: column;
+
+      .logo {
+        cursor: pointer;
+      }
     }
 
     .navMenu {

@@ -6,6 +6,20 @@
   margin-top: 1.5rem;
   text-align: center;
   padding: 12px;
+  cursor: pointer;
+}
+
+.book input, .submit input {
+  cursor: pointer;
+}
+
+.submit:hover, .book:hover {
+  opacity: .8;
+}
+
+.submit:active, .submit input:active, .book:active, .book input:active {
+  background-color: $color-primary;
+  color: white;
 }
 
 .submit {

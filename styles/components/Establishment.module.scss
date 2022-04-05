@@ -3,10 +3,24 @@
 .establishments {
   position: relative;
 
+  @include tablet-landscape {
+    display: flex;
+    // flex-direction: column;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: space-between;
+  }
+
   .establishment {
     border-top: 1px solid #808080;
     border-bottom: 1px solid #808080;
     padding: 20px 0;
+
+    @include tablet-landscape {
+      max-width: 48%; 
+      border: none;
+    }
 
     .textBox {
       display: flex;
@@ -58,5 +72,19 @@
 
   .establishment:last-of-type {
     border-bottom: none;
+  }
+
+  .establishment:nth-of-type(4n+1), .establishment:nth-of-type(4n+2) {
+
+    @include tablet-landscape {
+      border-top: 1px solid #808080;
+    }
+  }
+
+  .establishment:nth-of-type(4n+3), .establishment:nth-of-type(4n+4) {
+    
+    @include tablet-landscape {
+      border-top: 1px solid #808080;
+    }
   }
 }

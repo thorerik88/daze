@@ -8,7 +8,7 @@ import Button from '../components/layout/Button';
 import Head from '../components/layout/Head';
 import { useState } from 'react';
 import { FormValidation } from "../constants/FormValidation";
-import { apiCall } from "../api/ApiCall";
+import { LoginCall } from "../api/LoginCall";
 import { save } from "../storage/storage";
 
 const Login = () => {
@@ -30,7 +30,7 @@ const Login = () => {
     if (!checkUsername || !checkPassword) {
       return setMessage('Please type username and password'), setLoginSuccess(false)
     } else {
-      const loginResult = await apiCall(username, password);
+      const loginResult = await LoginCall(username, password);
       
       console.log(loginResult)
 

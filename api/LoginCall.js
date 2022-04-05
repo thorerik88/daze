@@ -1,6 +1,6 @@
 import { BASE_URL, ADMIN_URL } from "./api"
 
-export const apiCall = async (username, password) => {
+export const LoginCall = async (username, password) => {
   const url = BASE_URL + ADMIN_URL;
 
   const body = {
