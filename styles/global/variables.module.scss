@@ -17,6 +17,10 @@ $color-green: #28696A;
 
 /*    MIXINS    */
 
+// @mixin mobile {
+//   @media (max-width: 479px) { @content; }
+// }
+
 @mixin tablet-portrait {
   @media (min-width: 480px) { @content; }
 }

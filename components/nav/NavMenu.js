@@ -10,6 +10,7 @@ import styles from '../../styles/components/Navbar.module.scss';
 import { navLogo } from '../../constants/Images';
 import { Container } from "react-bootstrap";
 import MobileMenu from "./MobileMenu";
+import DesktopMenu from './DesktopMenu';
 import { visitorContent, adminContent } from '../../constants/MenuContent'
 import { MobileMenuContext, CloseMenuContext, AuthContext } from '../../context/Context';
 import { load } from "../../storage/storage";
@@ -21,49 +22,33 @@ const NavMenu = () => {
   const [toggle, setToggle] = useState(false);
   const [dataset, setDataset] = useState([]);
   
-  // check if user is logged in
+  let contentList = [];
+
+  // check if user is logged in and select menu
   useEffect(() => {
     if (load('token')) {
-      setAuth(true)
+      let newArray = [];
+      visitorContent.map(item => {
+        if (item.id !== 4) {
+          newArray.push(item)
+        }
+        contentList = newArray.concat(adminContent);
+      })
     } else {
-      setAuth(false)
+      contentList = visitorContent;
     }
+    setDataset(contentList);
   }, [])
-
-
-  let contentList = [];
   
-  // set which menu to display, based on Auth
-  if (!auth) {
-    contentList = visitorContent;
-  } else {
-    let newArray = [];
-    visitorContent.map(item => {
-      if (item.id !== 4) {
-        newArray.push(item)
-      }
-      contentList = newArray.concat(adminContent);
-    })
-  }
 
-  // set which menu to display, based on Auth
+  // open and close mobile menu
   const handleClick = () => {
     if (toggle) {
       setToggle(false)
     } else {
       if (!auth) {
-        setDataset(visitorContent)
         setToggle(true);
       } else if (auth) {
-        let newArray = [];
-
-        visitorContent.map(item => {
-          if (item.id !== 4) {
-            newArray.push(item)
-          }
-          contentList = newArray.concat(adminContent);
-        })
-        setDataset(contentList)
         setToggle(true);
       }
     } 
@@ -73,7 +58,10 @@ const NavMenu = () => {
     <nav className={styles.nav}>
       <Container className={styles.container}>
         <Link href={'/'}>
-          <a><Image className={styles.logo} src={'/logo-nav.svg'} width={navLogo.width} height={navLogo.height} alt="Holidaze logo"/></a>
+          <div className={styles.brandWrapper}>
+            <a className={styles.logo}><Image src={'/logo-nav.svg'} width={navLogo.width} height={navLogo.height} alt="Holidaze logo"/></a>
+            {auth ? <span>Logged in</span> : ''}
+          </div>
         </Link>
         <div className={styles.navMenu}>
           {/* <FontAwesomeIcon data='admin' className={styles.admin} onClick={() => handleClick('admin')} icon={faUser} /> */}
@@ -83,9 +71,9 @@ const NavMenu = () => {
       <MobileMenuContext.Provider value={{ toggle }}>
         <CloseMenuContext.Provider value={{ setToggle }}>
           <MobileMenu value={dataset} />
+          <DesktopMenu value={dataset} />
         </CloseMenuContext.Provider>
       </MobileMenuContext.Provider>
-      {auth ? <span>Logged in</span> : ''}
     </nav>
   );
 }
