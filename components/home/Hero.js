@@ -3,8 +3,8 @@ import styles from '../../styles/pages/Home.module.scss';
 import Image from 'next/image';
 import SearchForm from './SearchForm';
 
-const Hero = () => {
-
+const Hero = (props) => {
+  
   return ( 
     <div className={styles.hero}>
       <div className={styles.bgWrapper}>
@@ -17,7 +17,7 @@ const Hero = () => {
           alt="image showing a fancy hotel at nighttime"
         />
       </div>
-        <SearchForm />
+      <SearchForm {...props}/>
     </div>
    );
 }

@@ -19,7 +19,9 @@
     width: 90%;
     margin: auto;
 
-    .inputWrap {
+    
+
+    .searchWrap {
       position: relative;
 
       .icon {
@@ -37,7 +39,20 @@
         height: 40px;
         width: 100%;
       }
+
+      ul {
+        background: white;
+        position: absolute;
+        left: 0;
+        top: 40px;
+        width: 100%;
+
+        li {
+          padding: 5px;
+        }
+      }
     }
+    
   }
 }
 

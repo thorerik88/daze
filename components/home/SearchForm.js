@@ -7,16 +7,40 @@ import VisitorCall from '../../api/VisitorCall';
 import { useState, useEffect } from 'react';
 import { BASE_URL, ESTABLISHMENT_URL } from '../../api/api';
 
-const SearchForm = ({ establishments }) => {
+const SearchForm = (establishments) => {
+  
+  const [results, setResults] = useState([]);
 
-  console.log(establishments)
+  let list = establishments.children.props.data;
+
+  const handleSearch = (e) => {
+
+    let searchValue = e.target.value.trim().toLowerCase();
+
+    const filteredEst = list.filter((item) => {
+      if (item.attributes.name.toLowerCase().startsWith(searchValue)) {
+        return true;
+      }
+    });
+    if (filteredEst) {
+      setResults(filteredEst)
+    }
+    if (searchValue.length === 0) {
+      setResults([]);
+    }
+  }
 
   return ( 
     <div className={styles.formWrapper}>
       <form className={styles.form}>
-        <div className={styles.inputWrap}>
+        <div className={styles.searchWrap}>
           <FontAwesomeIcon className={styles.icon} icon={faBed} />
-          <input type='text' placeholder="Establishment..."/>
+          <input type='text' onKeyUp={handleSearch} placeholder="Establishment..."/>
+          <ul>
+            {results.map(item => {
+              return <li key={item.id}>{`${item.attributes.name}`}</li>
+            })}
+          </ul>
         </div>
         <Button value={'Search'} buttonType={'submit'} type='button'/>
       </form>
@@ -24,14 +48,3 @@ const SearchForm = ({ establishments }) => {
    );
 }
 export default SearchForm;
-
-export const getStaticProps = async () => {
-  const res = await fetch(BASE_URL + ESTABLISHMENT_URL);
-  const establishments = await res.json();
-
-  return {
-    props: {
-      establishments: establishments,
-    },
-  }
-}
