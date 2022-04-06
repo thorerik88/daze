@@ -4,7 +4,7 @@ import { useState, createContext, useContext, useEffect } from "react";
 import Image from 'next/image';
 import Link from 'next/link';
 
-import styles from '../../styles/components/Navbar.module.scss';
+import styles from '../../styles/components/nav/NavBar.module.scss';
 
 
 import { navLogo } from '../../constants/Images';
@@ -15,7 +15,7 @@ import { visitorContent, adminContent } from '../../constants/MenuContent'
 import { MobileMenuContext, CloseMenuContext, AuthContext } from '../../context/Context';
 import { load } from "../../storage/storage";
 
-const NavMenu = () => {
+const NavBar = () => {
 
   const { auth, setAuth } = useContext( AuthContext );
 
@@ -78,4 +78,4 @@ const NavMenu = () => {
   );
 }
  
-export default NavMenu;
+export default NavBar;

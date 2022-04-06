@@ -1,4 +1,4 @@
-import styles from '../../styles/components/NavAd.module.scss';
+import styles from '../../styles/components/nav/NavAd.module.scss';
 
 const NavAd = () => {
   return ( 

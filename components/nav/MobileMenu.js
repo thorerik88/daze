@@ -1,4 +1,4 @@
-import styles from '../../styles/components/MobileMenu.module.scss';
+import styles from '../../styles/components/nav/MobileMenu.module.scss';
 import { CloseMenuContext, MobileMenuContext } from '../../context/Context';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

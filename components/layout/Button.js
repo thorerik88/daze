@@ -1,4 +1,4 @@
-import styles from '../../styles/components/Button.module.scss';
+import styles from '../../styles/components/reuse/Button.module.scss';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBellConcierge } from '@fortawesome/free-solid-svg-icons';

@@ -1,4 +1,4 @@
-import styles from '../styles/components/Contact.module.scss';
+import styles from '../styles/pages/contact-us/Contact.module.scss';
 
 import Container from '../components/layout/Container';
 import Button from '../components/layout/Button';

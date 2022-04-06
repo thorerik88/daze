@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
-import styles from '../styles/components/Establishment.module.scss';
+import styles from '../styles/pages/establishments/Establishments.module.scss';
 
 import Image from 'next/image';
 import Container from '../components/layout/Container';

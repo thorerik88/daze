@@ -1,0 +1,47 @@
+@import '../../global/variables.module.scss';
+
+.breadcrumbs {
+  display: flex;
+
+  li {
+    margin: 0 5px;
+  }
+
+  li:first-of-type {
+    margin: 0 0 0 5px;
+  }
+
+  @include tablet-landscape {
+    display: none;
+  }
+}
+
+.adminSideMenu {
+  
+  @include tablet-landscape {
+    display: flex;
+    justify-content: space-between;  
+  }
+
+  .sideMenu {
+    display: none;
+    flex: 1;
+    padding-right: 1rem;
+    border-right: 1px solid #808080;
+
+    @include tablet-landscape {
+      display: flex;
+    }
+  }
+
+  .mainContent {
+    
+
+    @include tablet-landscape {
+      display: flex;
+      flex-direction: column;
+      flex: 4;
+      margin: 0 5rem;
+    }
+  }
+}

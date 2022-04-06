@@ -1,5 +1,5 @@
-import styles from '../styles/components/TravelTips.module.scss';
-import Container from '../components/layout/Container';
+import styles from '../../styles/components/reuse/TravelTips.module.scss';
+import Container from './Container';
 import Image from 'next/image';
 
 const TravelTips = () => {

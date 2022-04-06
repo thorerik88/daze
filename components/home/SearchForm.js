@@ -1,11 +1,9 @@
-import styles from '../../styles/pages/SearchForm.module.scss';
+import styles from '../../styles/pages/home/SearchForm.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBed } from '@fortawesome/free-solid-svg-icons';
 
 import Button from '../layout/Button';
-import VisitorCall from '../../api/VisitorCall';
-import { useState, useEffect } from 'react';
-import { BASE_URL, ESTABLISHMENT_URL } from '../../api/api';
+import { useState } from 'react';
 
 const SearchForm = (establishments) => {
   

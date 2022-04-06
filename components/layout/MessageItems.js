@@ -1,4 +1,4 @@
-import styles from '../styles/components/MessageItems.module.scss';
+import styles from '../../styles/components/reuse/MessageItems.module.scss';
 
 const MessageItems = ({ headings }) => {
 

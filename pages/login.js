@@ -3,7 +3,7 @@ import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import { useForm } from 'react-hook-form';
 
 import Container from "../components/layout/Container";
-import styles from '../styles/components/Login.module.scss';
+import styles from '../styles/pages/login/Login.module.scss';
 import Button from '../components/layout/Button';
 import Head from '../components/layout/Head';
 import { useState } from 'react';

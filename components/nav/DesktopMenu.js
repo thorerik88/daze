@@ -1,4 +1,4 @@
-import styles from '../../styles/components/DesktopMenu.module.scss';
+import styles from '../../styles/components/nav/DesktopMenu.module.scss';
 import Link from 'next/link';
 
 

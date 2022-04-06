@@ -1,4 +1,4 @@
-import styles from '../../styles/components/Footer.module.scss';
+import styles from '../../styles/components/footer/Footer.module.scss';
 import { footerLogo } from '../../constants/Images';
 import Container from '../layout/Container';
 import { visitorContent, adminContent } from '../../constants/MenuContent';
