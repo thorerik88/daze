@@ -7,10 +7,10 @@ import Image from 'next/image';
 import Container from '../../components/layout/Container';
 import Button from '../../components/layout/Button';
 import Head from '../../components/layout/Head';
-import { BASE_URL, ESTABLISHMENT_URL } from "../../api/api";
+import { BASE_URL, ESTABLISHMENT_URL, POPULATE, IMAGE_URL } from "../../api/api";
 
 export const getStaticProps = async () => {
-  const response = await fetch(BASE_URL + ESTABLISHMENT_URL);
+  const response = await fetch(BASE_URL + ESTABLISHMENT_URL + POPULATE);
   const establishments = await response.json();
 
   return {
@@ -19,7 +19,6 @@ export const getStaticProps = async () => {
 }
 
 const establishments = ({ establishments }) => {
-
   let listEst = establishments.data;
   console.log(listEst)
 
