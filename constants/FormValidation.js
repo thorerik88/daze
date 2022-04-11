@@ -5,6 +5,8 @@ export const FormValidation = (value, type) => {
     regEx = /^[A-Za-z][A-Za-z0-9_]{4,29}$/;
   } else if (type === 'password') {
     regEx = /^[A-Za-z]\w{7,14}$/;
+  } else if (type === 'email') {
+    regEx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   }
 
   if (value.match(regEx)) {

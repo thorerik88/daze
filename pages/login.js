@@ -1,12 +1,14 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faLock, faAt } from '@fortawesome/free-solid-svg-icons';
 import { useForm } from 'react-hook-form';
+import { useState } from 'react';
+
+import styles from '../styles/pages/login/Login.module.scss';
 
 import Container from "../components/layout/Container";
-import styles from '../styles/pages/login/Login.module.scss';
 import Button from '../components/layout/Button';
 import Head from '../components/layout/Head';
-import { useState } from 'react';
+
 import { FormValidation } from "../constants/FormValidation";
 import { LoginCall } from "../api/LoginCall";
 import { save } from "../storage/storage";
@@ -15,24 +17,21 @@ const Login = () => {
 
   const [message, setMessage] = useState('');
   const [loginSuccess, setLoginSuccess] = useState(false);
-  const [callType, setCallType] = useState('');
 
   const {register, handleSubmit} = useForm();
 
   const loginVal = async (e) => {
     
-    let username = e.username;
+    let email = e.email;
     let password = e.password;
 
-    let checkUsername = FormValidation(username, 'string');
+    let checkEmail = FormValidation(email, 'email');
     let checkPassword = FormValidation(password, 'password');
 
-    if (!checkUsername || !checkPassword) {
+    if (!checkEmail || !checkPassword) {
       return setMessage('Please type username and password'), setLoginSuccess(false)
     } else {
-      const loginResult = await LoginCall(username, password);
-      
-      console.log(loginResult)
+      const loginResult = await LoginCall(email, password);
 
       if (loginResult.error) {
         setMessage('Wrong username and/or password')
@@ -40,7 +39,7 @@ const Login = () => {
       } else {
         setMessage('You are now logged in');
         setLoginSuccess(true);
-        save('token', loginResult.jwt);
+        save('token', loginResult.idToken);
         window.location.href = '/admin';
       }
     }
@@ -60,8 +59,8 @@ const Login = () => {
             <div className={styles.formWrapper}>
               <div className={styles.inputs}>
                 <div className={styles.username}>
-                  <FontAwesomeIcon icon={faUser} />
-                  <input type='text' name='username' placeholder='Username' {...register('username')}/>
+                  <FontAwesomeIcon icon={faAt} />
+                  <input type='text' name='email' placeholder='Email' {...register('email')}/>
                 </div>
                 <div className={styles.password}>
                   <FontAwesomeIcon icon={faLock} />

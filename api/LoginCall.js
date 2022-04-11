@@ -1,26 +1,24 @@
-import { BASE_URL, ADMIN_URL } from "./api"
+import { ADMIN_URL } from "./api"
 
-export const LoginCall = async (username, password) => {
-  const url = BASE_URL + ADMIN_URL;
+export const LoginCall = async (email, password) => {
+  const url = ADMIN_URL + process.env.NEXT_PUBLIC_FIREBASE_API_KEY;
 
+  console.log(email, password)
   const body = {
-    identifier: username,
+    email: email,
     password: password,
+    returnSecureToken: true,
   }
 
   try {
     const response = await fetch(url, {
       method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
       body: JSON.stringify(body)
     })
 
 
     const data = await response.json();
-    
+    console.log(data)
     return data;
 
     
