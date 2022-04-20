@@ -3,7 +3,9 @@ import styles from '../../styles/components/reuse/Button.module.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBellConcierge } from '@fortawesome/free-solid-svg-icons';
 
-const Button = ({ value, buttonType, icon }) => { 
+import Link from 'next/link';
+
+const Button = ({ value, buttonType, icon, linkData }) => { 
 
   return  ( 
     <div className={buttonType === 'submit' ? styles.submit : styles.book}>
@@ -13,7 +15,9 @@ const Button = ({ value, buttonType, icon }) => {
             <FontAwesomeIcon className={styles.icon} icon={ faBellConcierge } />
           </div>
           <div className={styles.button}>
+            <Link href={'/establishments/' + linkData} key={linkData}>
             <a>{value}</a>
+            </Link>
           </div>
         </div>
         :

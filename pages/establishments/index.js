@@ -18,23 +18,15 @@ import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
 
 
-
-  
-
-const establishments = () => {
-  
+export const getStaticProps = async () => {
   initializeApp(clientCredentials);
   const db = getFirestore();  
   const colRef = collection(db, 'establishments');
+  let id = 1;
 
-  const [list, setEstablishments] = useState([]);
-  let id = 0;
-
-  const getData = async () => {
     const storage = getStorage();
     const snapshot = await getDocs(colRef);
     const establishments = [];
-    id += 1;
 
     for await (let establishment of snapshot.docs) {
       const imageRef = ref(storage, establishment.data().image_url);
@@ -44,28 +36,31 @@ const establishments = () => {
         image_url: imageUrl,
         id
       });
-      setEstablishments(establishments);
+      id += 1;
     }
-  }
+    return {
+      props: { establishments: establishments}
+    }
+}
+  
+const establishments = ({ establishments }) => {
 
-    
-  useEffect(() => {
-    getData()
-  }, [list.length])
+  const myLoader = ({ src }) => {
+    return src
+  }
 
   return ( 
     <>
       <Head title={'Establishments'} />
       <Container>
-        
         <h1>Establishments</h1>
         <div className={styles.establishments}>
-          {list.map(item => {
-            console.log(item)
+          {establishments.map(item => {
             return (
               <div className={styles.establishment} key={item.id}>
               <div className={styles.image}>
                 {<Image
+                  loader={myLoader(item.image_url)}
                   src={item.image_url}
                   width={1000}
                   height={685}
@@ -92,13 +87,13 @@ const establishments = () => {
                     <p>{item.zip} {item.town}</p>
                   </div>
                   <ul className={styles.options}>
-                    {item.breakfast ? <li>Breakfast Included</li> : ''}
-                    {item.cancelation ? <li>Free cancelation</li> : ''}
-                    {item.dogs ? <li>Dogs allowed</li> : ''}
+                    {item.breakfast ? <li>Breakfast Included</li> : <li className={styles.hiddenListItem}>Dogs</li>}
+                    {item.cancelation ? <li>Free cancelation</li> : <li className={styles.hiddenListItem}>Dogs</li>}
+                    {item.dogs ? <li>Dogs allowed</li> : <li className={styles.hiddenListItem}>Dogs</li>}
                   </ul>
                 </div>    
                 <div className={styles.button}>
-                  <Button value={'BOOK'} buttonType={'book'} icon={'fa-bell'} type='button'/>
+                  <Button value={'BOOK'} buttonType={'book'} icon={'fa-bell'} type='button' linkData={item.id} />
                 </div>
               </div>
             </div>
