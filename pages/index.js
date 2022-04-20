@@ -7,19 +7,44 @@ import Container from '../components/layout/Container';
 import { BASE_URL, ESTABLISHMENT_URL } from '../api/api';
 import SearchForm from '../components/home/SearchForm';
 
-export const getStaticProps = async () => {
-  const res = await fetch(BASE_URL + ESTABLISHMENT_URL);
-  const establishments = await res.json();
+import { initializeApp } from "firebase/app";
+import { clientCredentials } from "../firebaseConfig";
+import { getDoc, doc, getDocs, collection ,getFirestore } from "firebase/firestore";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
-  return {
-    props: {
-      establishments: establishments,
-    },
-  }
+export const getStaticProps = async () => {
+
+  initializeApp(clientCredentials);
+  const db = getFirestore();  
+  const colRef = collection(db, 'establishments');
+  
+
+    const storage = getStorage();
+    const snapshot = await getDocs(colRef);
+    const establishments = [];
+
+    for await (let establishment of snapshot.docs) {
+      const imageRef = ref(storage, establishment.data().image_url);
+      const imageUrl = await getDownloadURL(imageRef);
+      let docID = establishment.id;
+      establishments.push({
+        ...establishment.data(),
+        docID,
+        image_url: imageUrl,
+      });
+    }
+
+    
+
+    return {
+      props: { 
+        establishments: establishments,
+      }
+    }
 }
 
 export default function Home({ establishments }) {
-
+  
   return (
     <div className={styles.container}>
       <Head title={'Home'} />

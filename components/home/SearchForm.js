@@ -5,18 +5,24 @@ import { faBed } from '@fortawesome/free-solid-svg-icons';
 import Button from '../layout/Button';
 import { useState } from 'react';
 
-const SearchForm = (establishments) => {
+const SearchForm = ({ ...establishments }) => {
   
   const [results, setResults] = useState([]);
 
-  let list = establishments.children.props.data;
+  let list = Object.values(establishments.children.props);
+  
+
+  const handleClick = (e) => {
+    console.log('click')
+  }
 
   const handleSearch = (e) => {
 
     let searchValue = e.target.value.trim().toLowerCase();
 
     const filteredEst = list.filter((item) => {
-      if (item.attributes.name.toLowerCase().startsWith(searchValue)) {
+      console.log(item.name)
+      if (item.name.toLowerCase().startsWith(searchValue)) {
         return true;
       }
     });
@@ -36,7 +42,7 @@ const SearchForm = (establishments) => {
           <input type='text' onKeyUp={handleSearch} placeholder="Establishment..."/>
           <ul>
             {results.map(item => {
-              return <li key={item.id}>{`${item.attributes.name}`}</li>
+              return <li key={item.id} onClick={handleClick} >{`${item.name}`}</li>
             })}
           </ul>
         </div>

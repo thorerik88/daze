@@ -23,7 +23,7 @@ export const getStaticProps = async () => {
   initializeApp(clientCredentials);
   const db = getFirestore();  
   const colRef = collection(db, 'establishments');
-  let id = 1;
+  
 
     const storage = getStorage();
     const snapshot = await getDocs(colRef);
@@ -37,9 +37,9 @@ export const getStaticProps = async () => {
         ...establishment.data(),
         docID,
         image_url: imageUrl,
-        id
+      
       });
-      id += 1;
+      
     }
 
 
@@ -52,7 +52,6 @@ export const getStaticProps = async () => {
 }
   
 const establishments = ({ establishments }) => {  
-
   const myLoader = ({ src }) => {
     return src
   }
