@@ -16,9 +16,10 @@ import { useEffect, useState } from "react";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 // import { GetImageUrl } from "../../api/GetFromDb";
 
-
+let test = [];
 
 export const getStaticProps = async () => {
+
   initializeApp(clientCredentials);
   const db = getFirestore();  
   const colRef = collection(db, 'establishments');
@@ -31,19 +32,26 @@ export const getStaticProps = async () => {
     for await (let establishment of snapshot.docs) {
       const imageRef = ref(storage, establishment.data().image_url);
       const imageUrl = await getDownloadURL(imageRef);
+      let docID = establishment.id;
       establishments.push({
         ...establishment.data(),
+        docID,
         image_url: imageUrl,
         id
       });
       id += 1;
     }
+
+
+
     return {
-      props: { establishments: establishments}
+      props: { 
+        establishments: establishments,
+      }
     }
 }
   
-const establishments = ({ establishments }) => {
+const establishments = ({ establishments }) => {  
 
   const myLoader = ({ src }) => {
     return src
@@ -57,7 +65,7 @@ const establishments = ({ establishments }) => {
         <div className={styles.establishments}>
           {establishments.map(item => {
             return (
-              <div className={styles.establishment} key={item.id}>
+              <div className={styles.establishment} key={item.docID}>
               <div className={styles.image}>
                 {<Image
                   loader={myLoader(item.image_url)}
@@ -93,7 +101,7 @@ const establishments = ({ establishments }) => {
                   </ul>
                 </div>    
                 <div className={styles.button}>
-                  <Button value={'BOOK'} buttonType={'book'} icon={'fa-bell'} type='button' linkData={item.id} />
+                  <Button value={'BOOK'} buttonType={'book'} icon={'fa-bell'} type='button' linkData={item.docID} />
                 </div>
               </div>
             </div>
