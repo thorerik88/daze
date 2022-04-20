@@ -1,11 +1,20 @@
 import { initializeApp } from "firebase/app";
 import { clientCredentials } from "../firebaseConfig";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
 import { useState } from 'react';
 import { GetContext } from "../context/Context";
 
-const GetFromDb = () => {
+export const GetImageUrl = (imageName) => {
+  const storage = getStorage();
+  getDownloadURL(ref(storage, imageName))
+    .then ((url) => {
+      return {url}
+    })
+}
+
+export const GetFromDb = () => {
   initializeApp(clientCredentials);
   const db = getFirestore();
   const colRef = collection(db, 'establishments');
@@ -23,5 +32,3 @@ const GetFromDb = () => {
       console.log(err.message)
     })
 }
- 
-export default GetFromDb;

@@ -11,75 +11,68 @@ import Head from '../../components/layout/Head';
 // FIREBASE
 import { initializeApp } from "firebase/app";
 import { clientCredentials } from "../../firebaseConfig";
-import { collection, getDocs, getFirestore } from "firebase/firestore";
+import { collection, getDocs, getFirestore, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
+// import { GetImageUrl } from "../../api/GetFromDb";
 
+
+
+
+  
 
 const establishments = () => {
+  
+  initializeApp(clientCredentials);
+  const db = getFirestore();  
+  const colRef = collection(db, 'establishments');
 
+  const [list, setEstablishments] = useState([]);
+  let id = 0;
 
-  // hotel data
-  const [list, setList] = useState([]);
-  const [path, setPath] = useState('')
+  const getData = async () => {
+    const storage = getStorage();
+    const snapshot = await getDocs(colRef);
+    const establishments = [];
+    id += 1;
 
-  useEffect(() => {
-    initializeApp(clientCredentials);
-
-    const db = getFirestore();
-    const colRef = collection(db, 'establishments');
-
-    getDocs(colRef)
-      .then((snapshot) => {
-        let establishments = [];
-        snapshot.docs.map(item => {
-          establishments.push({ ...item.data(), id: item.id })
-        })
-        setList(establishments);
-      })
-      .catch(err => {
-        console.log(err.message)
-      })
-    }, [])
-
-  console.log(list)
-
-  list.map(item => {
-    if (item.image_url) {
-      const storage = getStorage();
-      getDownloadURL(ref(storage, 'fancy1000.jpg'))
-      .then ((url) => {
-        setPath(url)
-        console.log(path)
-      })
+    for await (let establishment of snapshot.docs) {
+      const imageRef = ref(storage, establishment.data().image_url);
+      const imageUrl = await getDownloadURL(imageRef);
+      establishments.push({
+        ...establishment.data(),
+        image_url: imageUrl,
+        id
+      });
+      setEstablishments(establishments);
     }
-  })
-
-  const myLoader = () => {
-    return `https://firebasestorage.googleapis.com/v0/b/holidaze-db.appspot.com/o/fancy1000.jpg?alt=media&token=9e9435d4-00db-4f21-b5a7-5a4f02759ef9`
   }
+
+    
+  useEffect(() => {
+    getData()
+  }, [list.length])
 
   return ( 
     <>
       <Head title={'Establishments'} />
       <Container>
+        
         <h1>Establishments</h1>
         <div className={styles.establishments}>
-          
           {list.map(item => {
+            console.log(item)
             return (
               <div className={styles.establishment} key={item.id}>
               <div className={styles.image}>
-                <Image 
-                  // loader={myLoader}
-                  src={path}
-                  // layout='fill'
+                {<Image
+                  src={item.image_url}
                   width={1000}
                   height={685}
                   responsive='true'
                   objectFit='contain'
                   alt='A fancy hotel'
-                />
+                />}
               </div>
               <div className={styles.textBox}>
                 <div className={styles.heading}>
