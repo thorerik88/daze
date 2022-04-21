@@ -1,8 +1,10 @@
+// FONT AWESOME
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
 import styles from '../../styles/pages/establishments/Establishments.module.scss';
 
+// COMPONENTS
 import Image from 'next/image';
 import Container from '../../components/layout/Container';
 import Button from '../../components/layout/Button';
@@ -11,12 +13,10 @@ import Head from '../../components/layout/Head';
 // FIREBASE
 import { initializeApp } from "firebase/app";
 import { clientCredentials } from "../../firebaseConfig";
-import { collection, getDocs, getFirestore, onSnapshot } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { collection, getDocs, getFirestore } from "firebase/firestore";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-// import { GetImageUrl } from "../../api/GetFromDb";
 
-let test = [];
+
 
 export const getStaticProps = async () => {
 
@@ -25,30 +25,30 @@ export const getStaticProps = async () => {
   const colRef = collection(db, 'establishments');
   
 
-    const storage = getStorage();
-    const snapshot = await getDocs(colRef);
-    const establishments = [];
+  const storage = getStorage();
+  const snapshot = await getDocs(colRef);
+  const establishments = [];
 
-    for await (let establishment of snapshot.docs) {
-      const imageRef = ref(storage, establishment.data().image_url);
-      const imageUrl = await getDownloadURL(imageRef);
-      let docID = establishment.id;
-      establishments.push({
-        ...establishment.data(),
-        docID,
-        image_url: imageUrl,
-      
-      });
-      
+  for await (let establishment of snapshot.docs) {
+    const imageRef = ref(storage, establishment.data().image_url);
+    const imageUrl = await getDownloadURL(imageRef);
+    let docID = establishment.id;
+    establishments.push({
+      ...establishment.data(),
+      docID,
+      image_url: imageUrl,
+    
+    });
+    
+  }
+
+
+
+  return {
+    props: { 
+      establishments: establishments,
     }
-
-
-
-    return {
-      props: { 
-        establishments: establishments,
-      }
-    }
+  }
 }
   
 const establishments = ({ establishments }) => {  

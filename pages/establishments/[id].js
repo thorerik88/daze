@@ -10,21 +10,15 @@ const storage = getStorage();
 
 export const getStaticPaths = async () => {
   
-  
-  
   const snapshot = await getDocs(colRef);
   const establishments = [];
 
   for await (let establishment of snapshot.docs) {
-    const imageRef = ref(storage, establishment.data().image_url);
-    const imageUrl = await getDownloadURL(imageRef);
     let docID = establishment.id;
     establishments.push({
-      ...establishment.data(),
       docID,
-      image_url: imageUrl,
     });
-    
+  }
     const paths = establishments.map(item => {
       return {
         params: { id: item.docID.toString() }
@@ -35,7 +29,6 @@ export const getStaticPaths = async () => {
       paths,
       fallback: false
     }
-  }
 }
 
 
@@ -43,7 +36,6 @@ export const getStaticProps = async (context) => {
   const id = context.params.id;
   const docRef = doc(db, 'establishments', id);
   const snapshot = await getDoc(docRef);
-  
 
     return {
       props: { 

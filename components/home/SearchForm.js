@@ -2,6 +2,8 @@ import styles from '../../styles/pages/home/SearchForm.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBed } from '@fortawesome/free-solid-svg-icons';
 
+import Link from 'next/link';
+
 import Button from '../layout/Button';
 import { useState } from 'react';
 
@@ -10,18 +12,12 @@ const SearchForm = ({ ...establishments }) => {
   const [results, setResults] = useState([]);
 
   let list = Object.values(establishments.children.props);
-  
-
-  const handleClick = (e) => {
-    console.log('click')
-  }
 
   const handleSearch = (e) => {
 
     let searchValue = e.target.value.trim().toLowerCase();
 
     const filteredEst = list.filter((item) => {
-      console.log(item.name)
       if (item.name.toLowerCase().startsWith(searchValue)) {
         return true;
       }
@@ -42,7 +38,12 @@ const SearchForm = ({ ...establishments }) => {
           <input type='text' onKeyUp={handleSearch} placeholder="Establishment..."/>
           <ul>
             {results.map(item => {
-              return <li key={item.id} onClick={handleClick} >{`${item.name}`}</li>
+              return ( 
+                <li key={`${item.docID}`} >
+                  <Link href={'/establishments/' + `${item.docID}`}>
+                    <a>{item.name}</a>
+                  </Link>
+                </li>)
             })}
           </ul>
         </div>
