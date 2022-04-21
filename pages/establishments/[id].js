@@ -1,16 +1,21 @@
-import styles from '../../styles/pages/establishments/details.module.scss';
+import styles from '../../styles/pages/establishments/Details.module.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
 import Head from '../../components/layout/Head';
 import Container from '../../components/layout/Container';
+import Button from '../../components/layout/Button';
+import Reservation from '../../components/establishments/Reservation';
 
 import Image from 'next/image';
+// import { Wrapper, Status } from '@googlemaps/react-wrapper';
 
 import { initializeApp } from "firebase/app";
 import { clientCredentials } from "../../firebaseConfig";
 import { getDoc, doc, getDocs, collection ,getFirestore } from "firebase/firestore";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
+// import { useRef, useState, useEffect } from 'react';
+
 
 initializeApp(clientCredentials);
 const db = getFirestore();  
@@ -63,58 +68,79 @@ export const getStaticProps = async (context) => {
   
 }
 
+
+
 const myLoader = ({ src }) => {
   return src
 }
 
 const details = ({ item }) => {
+
   item = item[0]
-  console.log(item)
-  
+
+  let grade;
+  if (item.rating < 6) {
+    grade = 'Good';
+  } else if (item.rating < 9) {
+    grade = 'Great';
+  } else if (item.rating > 9) {
+    grade = 'Excellent';
+  }
+
   return ( 
   <>
     <Head title={'Details'} />
     <Container>
-      <div className={styles.establishments}>
-        <div className={styles.establishment} key={item.docID}>
-          <div className={styles.image}>
-            {<Image
-              loader={myLoader(item.image_url)}
-              src={item.image_url}
-              width={1000}
-              height={685}
-              responsive='true'
-              objectFit='contain'
-              alt={item.alt_text}
-            />}
+      <h1>Establishment details</h1>
+      <div className={styles.establishment}>
+        <div className={styles.heading}>
+          <div className={styles.name}>
+            <h2>{item.name}</h2>
           </div>
-          <div className={styles.textBox}>
-            <div className={styles.heading}>
-              <div className={styles.name}>
-                <h2>{item.name}</h2>
-              </div>
-              <div className={styles.price}>
-                <h2>{item.price} kr</h2>
-              </div>
-            </div>
-            <div className={styles.text}>
-              <div className={styles.address}>
-                <div className={styles.addressIcon}>
-                  <FontAwesomeIcon icon={faLocationDot} />
-                  <p>{item.street}</p>
+          <div className={styles.price}>
+            <h2>{item.price} kr</h2>
+          </div>
+        </div>
+        <div className={styles.image}>
+          {<Image
+            loader={myLoader(item.image_url)}
+            src={item.image_url}
+            width={1000}
+            height={685}
+            responsive='true'
+            objectFit='contain'
+            alt={item.alt_text}
+          />}
+        </div>
+        <div className={styles.textBox}>
+          
+            <div className={styles.description}>
+              <div className={styles.descriptionHeader}>
+                <h2>Description</h2>
+                <div className={styles.rating}>
+                  <span className={styles.number}>{item.rating}</span>
+                  <h2 className={styles.grade}>{grade}</h2>
                 </div>
-                <p>{item.zip} {item.town}</p>
               </div>
-              <ul className={styles.options}>
-                {item.breakfast ? <li>Breakfast Included</li> : <li className={styles.hiddenListItem}>Dogs</li>}
-                {item.cancelation ? <li>Free cancelation</li> : <li className={styles.hiddenListItem}>Dogs</li>}
-                {item.dogs ? <li>Dogs allowed</li> : <li className={styles.hiddenListItem}>Dogs</li>}
-              </ul>
-            </div>    
-            <div className={styles.button}>
-              {/* <Button value={'BOOK'} buttonType={'book'} icon={'fa-bell'} type='button' linkData={item.docID} /> */}
+              <p>{item.description}</p>
             </div>
-          </div>
+    
+          
+          <div className={styles.text}>
+            <div className={styles.address}>
+              <div className={styles.addressIcon}>
+                <FontAwesomeIcon icon={faLocationDot} />
+                <p>{item.street}</p>
+              </div>
+              <p>{item.zip} {item.town}</p>
+            </div>
+            <ul className={styles.options}>
+              {item.breakfast ? <li>Breakfast Included</li> : <li className={styles.danger}>Breakfast not included</li>}
+              {item.cancelation ? <li>Free cancelation</li> : <li className={styles.danger}>Not free cancelation</li>}
+              {item.dogs ? <li>Dogs allowed</li> : <li className={styles.danger}>Dogs not allowed</li>}
+            </ul>
+          </div>    
+          <Reservation />
         </div>
       </div>
     </Container>

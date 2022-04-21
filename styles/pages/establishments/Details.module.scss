@@ -1,0 +1,80 @@
+@import '../../global/variables.module.scss';
+
+
+.establishment {
+
+  @include tablet-landscape {
+    max-width: 48%; 
+    border: none;
+  }
+
+  .heading {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .textBox {
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+
+    .description {
+      
+      .descriptionHeader {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .number {
+          background: $color-green;
+          color: white;
+          font-size: 21px;
+          padding: 2px 10px;
+        }
+
+        h2 {
+          display: inline;
+          padding-left: 5px;
+        }
+      }
+    }
+
+    .text {
+      display: flex;
+      justify-content: space-between;
+      
+
+      .address {
+        
+        .addressIcon {
+          display: flex;
+
+          p {
+            margin-left: 5px;
+          }
+        }
+
+        p {
+          margin: 0;
+        }
+      }
+
+      .options {
+        color: $color-green;
+        list-style-type: initial;
+
+        .danger {
+          color: $color-secondary;
+        }
+      }
+    }
+
+    .button {
+      display: inline-block;
+      width: 100%;
+      margin-left: auto;
+      margin-right: 0;
+    }
+  }
+}
+// }
