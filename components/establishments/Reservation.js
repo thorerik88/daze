@@ -3,23 +3,55 @@ import styles from '../../styles/pages/establishments/Reservation.module.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
-import Container from "../layout/Container";
 import Button from "../layout/Button";
 import Nationality from './Nationality';
 import { NationalityContext } from '../../context/Context';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 
 const Reservation = () => {
 
   const [nat, setNat] = useState('');
+  const [guests, setGuests] = useState(1);
+  const [rooms, setRooms] = useState(1);
 
-  const { register, handleSubmit } = useForm();
+
+  // change input value on decrement
+  const handleDecrement = (e) => {
+    let button = e.currentTarget.dataset.name;
+    if (button === 'guests') {
+      if (guests < 2) {
+        setGuests(1)
+      } else {
+        setGuests(guests - 1)
+      }
+    } else if (button === 'rooms') {
+      if (rooms < 2) {
+        setRooms(1)
+      } else {
+        setRooms(rooms - 1)
+      }
+    }
+  }
+
+  // change input value on increment
+  const handleIncrement = (e) => {
+    let button = e.currentTarget.dataset.name;
+    if (button === 'guests') {
+      setGuests(guests + 1)
+    } else if (button === 'rooms') {
+      setRooms(rooms + 1);
+    }
+  }
+
+  // submit form
+  const { register, handleSubmit } = useForm({});
+  
   const onSubmit = (data) => {
     let nationality = {'nationality': nat}
-    console.log(data, nationality)
+    console.log(data.guests)
   };
 
   return (   
@@ -52,18 +84,18 @@ const Reservation = () => {
           <div className={styles.qty}>
             <span>Guests</span>
             <div className={styles.qtyAction}>
-              <FontAwesomeIcon className={styles.actionButton} icon={faMinus} />
-              <input type='number' name='guests' readOnly='defaultValue' value='1' {...register('guests')}/>
-              <FontAwesomeIcon className={styles.actionButton} icon={faPlus} />
+              <div className={styles.actionButton} data-name={'guests'} onClick={handleDecrement}><FontAwesomeIcon icon={faMinus} /></div>
+              <input type='number' name='guests' readOnly='defaultValue' value={guests} {...register('guests')}/>
+              <div className={styles.actionButton} data-name={'guests'} onClick={handleIncrement}><FontAwesomeIcon icon={faPlus} /></div>
             </div>
           </div>
           <div className={styles.qty}>
             <span>Rooms</span>
             <div className={styles.qtyAction}>
-              <FontAwesomeIcon className={styles.actionButton} icon={faMinus} />
-              <input type='number' name='rooms' readOnly='defaultValue' value='1' {...register('rooms')}/>
-              <FontAwesomeIcon className={styles.actionButton} icon={faPlus} />
-            </div>
+                <div className={styles.actionButton} data-name={'rooms'} onClick={handleDecrement} ><FontAwesomeIcon icon={faMinus} /></div>
+                <input type='number' name='rooms' readOnly='defaultValue' value={rooms} {...register('rooms')}/>
+                <div className={styles.actionButton} data-name={'rooms'} onClick={handleIncrement}><FontAwesomeIcon icon={faPlus} /></div>
+              </div>
           </div>
         </div>
         <div className={styles.inputGroup}>

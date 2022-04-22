@@ -88,13 +88,17 @@
         
         .qtyAction {
 
+          display: flex;
+          align-items: center;
+
           .actionButton {
             font-size: 21px;
+            display: inline;
           }
 
           input {
             font-size: 19px;
-            padding-bottom: 7px;
+            padding-bottom: 15px;
             margin: 15px 5px 10px 5px;
             width: 25px;
             text-align: center;
