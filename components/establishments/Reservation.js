@@ -7,8 +7,9 @@ import Button from "../layout/Button";
 import Nationality from './Nationality';
 import { NationalityContext } from '../../context/Context';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { FormValidation } from '../../constants/FormValidation';
 
 
 const Reservation = () => {
@@ -17,6 +18,18 @@ const Reservation = () => {
   const [guests, setGuests] = useState(1);
   const [rooms, setRooms] = useState(1);
 
+  const [nameError, setNameError] = useState(false);
+  const [phoneError, setPhoneError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+
+  // submit form
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm({});
+
+  useEffect(() => {
+    console.log('guests: ' + guests, 'rooms: ' + rooms)
+    setValue('guests', guests)
+    setValue('rooms', rooms)
+  }, [rooms, guests])
 
   // change input value on decrement
   const handleDecrement = (e) => {
@@ -25,49 +38,79 @@ const Reservation = () => {
       if (guests < 2) {
         setGuests(1)
       } else {
-        setGuests(guests - 1)
+        setGuests(prevCount => prevCount - 1)
       }
+        
+
     } else if (button === 'rooms') {
       if (rooms < 2) {
         setRooms(1)
       } else {
-        setRooms(rooms - 1)
+        setRooms(prevCount => prevCount - 1)
+      }
+    }
+  }
+  // change input value on increment
+
+  const handleIncrement = (e) => {
+    let button = e.currentTarget.dataset.name;
+    if (button === 'guests') {
+      if (guests < 8 ) {
+        setGuests(prevCount => prevCount + 1)
+      }
+    } else if (button === 'rooms') {
+      if (rooms < 8) {
+        setRooms(prevCount => prevCount + 1)
       }
     }
   }
 
-  // change input value on increment
-  const handleIncrement = (e) => {
-    let button = e.currentTarget.dataset.name;
-    if (button === 'guests') {
-      setGuests(guests + 1)
-    } else if (button === 'rooms') {
-      setRooms(rooms + 1);
-    }
-  }
-
-  // submit form
-  const { register, handleSubmit } = useForm({});
-  
   const onSubmit = (data) => {
     let nationality = {'nationality': nat}
-    console.log(data.guests)
+    data = {...data, ...nationality}
+    makeReservation(data);
   };
+
+  
+  const makeReservation = async (data) => {
+    setNameError(false);
+    setPhoneError(false);
+    setEmailError(false);
+
+    let checkName = FormValidation(data.name, 'string');
+    let checkPhone = FormValidation(data.phone, 'number');
+    let checkEmail = FormValidation(data.email, 'email');
+
+    if (checkName && checkPhone && checkEmail) {
+      console.log(data)
+    }
+     
+    if (!checkName) {
+      setNameError(true);
+    }
+    if (!checkPhone) {
+      setPhoneError(true);
+    } 
+    if(!checkEmail) {
+      setEmailError(true);
+    }
+
+  }
 
   return (   
     <form className={styles.form} name='contact' onSubmit={handleSubmit(onSubmit)}>
       <div className={styles.contentWrapper}>
         <h2>Make a reservation</h2>
         <div className={styles.inputGroup}>
-          <input type='text' name='name' {...register('name')} />
+          <input className={nameError ? styles.danger : ''} type='text' name='name' {...register('name')} />
           <span>Name</span>
         </div>
         <div className={styles.inputGroup}>
-          <input type='number' name='phone' {...register('phone')} />
+          <input className={phoneError ? styles.danger : ''} type='number' name='phone' {...register('phone')} />
           <span>Phone</span>
         </div>
         <div className={styles.inputGroup}>
-          <input type='email' name='email' {...register('email')} />
+          <input className={emailError ? styles.danger : ''} type='email' name='email' {...register('email')} />
           <span>Email</span>
         </div>
         <div className={styles.inputGroups}>
@@ -85,7 +128,7 @@ const Reservation = () => {
             <span>Guests</span>
             <div className={styles.qtyAction}>
               <div className={styles.actionButton} data-name={'guests'} onClick={handleDecrement}><FontAwesomeIcon icon={faMinus} /></div>
-              <input type='number' name='guests' readOnly='defaultValue' value={guests} {...register('guests')}/>
+              <input type='number' name='guests' readOnly='defaultValue' value={guests} {...register('guests', {valueAsNumber: true})}/>
               <div className={styles.actionButton} data-name={'guests'} onClick={handleIncrement}><FontAwesomeIcon icon={faPlus} /></div>
             </div>
           </div>
@@ -93,7 +136,7 @@ const Reservation = () => {
             <span>Rooms</span>
             <div className={styles.qtyAction}>
                 <div className={styles.actionButton} data-name={'rooms'} onClick={handleDecrement} ><FontAwesomeIcon icon={faMinus} /></div>
-                <input type='number' name='rooms' readOnly='defaultValue' value={rooms} {...register('rooms')}/>
+                <input type='number' name='rooms' readOnly='defaultValue' value={rooms} {...register('rooms', {valueAsNumber: true})}/>
                 <div className={styles.actionButton} data-name={'rooms'} onClick={handleIncrement}><FontAwesomeIcon icon={faPlus} /></div>
               </div>
           </div>

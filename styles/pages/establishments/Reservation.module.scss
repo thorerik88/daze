@@ -1,7 +1,6 @@
 @import '../../global/variables.module.scss';
 
 
-
 .form {
   margin: 25px 0;
   background: $color-bg;
@@ -28,6 +27,10 @@
       position: relative;
       display: flex;
       margin: 0 5px;
+
+      .danger {
+        border: 1px solid $color-secondary;
+      }
 
       span {
         position: absolute;
