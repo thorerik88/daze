@@ -1,6 +1,6 @@
 
 import styles from '../../styles/components/reuse/AdminDash.module.scss';
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import Link from 'next/link';
 
 import Login from '../login';
@@ -12,15 +12,15 @@ import { AuthContext } from '../../context/Context';
 
 import { initializeApp } from "firebase/app";
 import { clientCredentials } from "../../firebaseConfig";
-import { getDocs, collection ,getFirestore } from "firebase/firestore";
-import { getStorage, } from "firebase/storage";
+import { getDoc, doc, getDocs, collection ,getFirestore } from "firebase/firestore";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
+
+initializeApp(clientCredentials);
+const db = getFirestore();  
 
 export const getStaticProps = async () => {
-  initializeApp(clientCredentials);
-  const db = getFirestore();  
+  
   const colRef = collection(db, 'enquiries');
-
-  const storage = getStorage();
   const snapshot = await getDocs(colRef);
   const enquiries = [];
   
@@ -41,9 +41,39 @@ export const getStaticProps = async () => {
 
 }
 
-const Enquiries = ({ enquiries }) => {
+export const getDocument = async (id) => {
+  const docRef = doc(db, 'enquiries', id);
+  const snapshot = await getDoc(docRef);
+  const enquiries = [];
+  
+  enquiries.push({
+    ...snapshot.data(),
+  })
 
+  return {
+    props: {
+      item: enquiries,
+    }
+  }
+}
+
+
+export const myLoader = async (id) => {
+  return await getDocument(id);
+}
+
+const Enquiries = ({ enquiries }) => {
   const { auth } = useContext( AuthContext );
+
+  const [enquiry, setEnquiry] = useState([]);
+
+  const handleClick = e => {
+    let id = e.target.dataset.id
+    let list = myLoader(id)
+    setEnquiry(list)
+  }
+
+  console.log(enquiry)
 
   return ( 
     <>
@@ -69,13 +99,14 @@ const Enquiries = ({ enquiries }) => {
                 {enquiries.map(item => {
                   return (
                     <div key={item.docID} className={styles.item}>
-                      <p>{item.name}</p>
+                      <p data-id={`${item.docID}`} onClick={handleClick}>{item.name}</p>
                       <p>{item.rooms}</p>
                       <p>{item.checkin}</p>
                     </div>)
                   })}
               </div>
               <div className={styles.details}>
+                <h1>Enquiry</h1>
                 <h2>Name: Thor-Erik</h2>
                 <p><strong>Date: 2022.04.27</strong></p>
                 <p><strong>Hotel Name: Zander K</strong></p>
