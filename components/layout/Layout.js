@@ -5,7 +5,6 @@ import { useContext, useState } from 'react';
 import { AuthContext } from '../../context/Context';
 
 const Layout = ({ children }) => {
-    console.log(children)
     return ( 
         <>
             <NavBar />

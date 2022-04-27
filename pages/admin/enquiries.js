@@ -1,25 +1,47 @@
 
 import styles from '../../styles/components/reuse/AdminDash.module.scss';
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import Link from 'next/link';
-import Router from 'next/router';
 
+import Login from '../login';
 import Container from "../../components/layout/Container";
 import Head from "../../components/layout/Head";
-import MessageItems from "../../components/layout/MessageItems";
 import AdminDash from '../../components/layout/AdminDash';
 import TravelTips from '../../components/layout/TravelTips';
 import { AuthContext } from '../../context/Context';
 
-const Enquiries = () => {
+import { initializeApp } from "firebase/app";
+import { clientCredentials } from "../../firebaseConfig";
+import { getDocs, collection ,getFirestore } from "firebase/firestore";
+import { getStorage, } from "firebase/storage";
 
-    const redirect = () => {
-      useEffect(() => {
-        Router.push('/')
-      })
+export const getStaticProps = async () => {
+  initializeApp(clientCredentials);
+  const db = getFirestore();  
+  const colRef = collection(db, 'enquiries');
+
+  const storage = getStorage();
+  const snapshot = await getDocs(colRef);
+  const enquiries = [];
+  
+  for await (let enquiry of snapshot.docs) {
+    let docID = enquiry.id;
+    enquiries.push({
+      ...enquiry.data(),
+      docID,
+    });
+  }
+  
+
+  return {
+    props: { 
+      enquiries: enquiries,
     }
-  
-  
+  }
+
+}
+
+const Enquiries = ({ enquiries }) => {
 
   const { auth } = useContext( AuthContext );
 
@@ -38,11 +60,39 @@ const Enquiries = () => {
           </div>
           <div className={styles.mainContent}>
             <h1>Enquiries</h1>
-            <MessageItems headings={['Name', 'Rooms', 'Date']} />
+              <div className={styles.wrapper}>
+                <div className={styles.heading}>
+                  <p>Name</p>
+                  <p>Rooms</p>
+                  <p>Date</p>
+                </div>
+                {enquiries.map(item => {
+                  return (
+                    <div key={item.docID} className={styles.item}>
+                      <p>{item.name}</p>
+                      <p>{item.rooms}</p>
+                      <p>{item.checkin}</p>
+                    </div>)
+                  })}
+              </div>
+              <div className={styles.details}>
+                <h2>Name: Thor-Erik</h2>
+                <p><strong>Date: 2022.04.27</strong></p>
+                <p><strong>Hotel Name: Zander K</strong></p>
+                <p>Phone: 47474747</p>
+                <p>Email: thorerik88@hotmail.com</p>
+                <p>Checkin: 2022.04.30</p>
+                <p>Checkout: 2022.05.01</p>
+                <p>Guests: 4</p>
+                <p>Rooms: 2</p>
+                <p>Wants newsletters</p>
+            </div>
             <TravelTips />
           </div>
         </div>
-      </Container> : redirect()}
+      </Container> 
+      : 
+      <Login />}
     </>
    );
 }

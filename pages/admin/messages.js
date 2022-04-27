@@ -2,29 +2,22 @@ import styles from '../../styles/components/reuse/AdminDash.module.scss';
 
 import Container from "../../components/layout/Container";
 import Head from "../../components/layout/Head";
-import MessageItems from "../../components/layout/MessageItems";
-import { load } from '../../storage/storage';
+import Login from '../login';
 import AdminDash from '../../components/layout/AdminDash';
 import TravelTips from '../../components/layout/TravelTips';
 
-import { useEffect } from 'react';
-import Router from 'next/router';
+import { useContext } from 'react';
 import Link from 'next/link';
+import { AuthContext } from '../../context/Context';
 
 const Messages = () => {
 
-  useEffect(() => {
-    if (!load('token')) {
-      Router.push('/')
-    }
-  })
-  
-
+  const { auth } = useContext( AuthContext );  
 
   return ( 
     <>
       <Head title={'Messages'} />
-      <Container>
+      {auth ? <Container>
         <ul className={styles.breadcrumbs}>
           <Link href='/admin'><li><a>admin</a></li></Link>
           <li>{'>'}</li>
@@ -36,11 +29,27 @@ const Messages = () => {
           </div>
           <div className={styles.mainContent}>
             <h1>Messages</h1>
-            <MessageItems headings={['Name', 'Subject', 'Date']} />
+            <div className={styles.wrapper}>
+              <div className={styles.heading}>
+                <p>Name</p>
+                <p>Subject</p>
+                <p>Date</p>
+              </div>
+              <div className={styles.item}>
+                <p>Name</p>
+                <p>Subject</p>
+                <p>Date</p>
+              </div>
+            </div>
+            <div className={styles.details}>
+              <h2>Name</h2>
+            </div>
             <TravelTips />
           </div>
         </div>
       </Container>
+      :
+      <Login />}
     </>
    );
 }

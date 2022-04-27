@@ -97,6 +97,12 @@ const Reservation = (hotelName) => {
     let checkPhone = FormValidation(data.phone, 'number');
     let checkEmail = FormValidation(data.email, 'email');
     
+    let dateToday = new Date();
+    let day = String(dateToday.getDate()).padStart(2, '0');
+    let month = String(dateToday.getMonth() + 1).padStart(2, 0);
+    let year = dateToday.getFullYear();
+    dateToday = `${year}-${month}-${day}`;
+
     // submit data if OK
     if (checkName && checkPhone && checkEmail && data.checkin && data.checkout) {
       const newEnquiry = doc(collection(db, 'enquiries'))
@@ -110,6 +116,7 @@ const Reservation = (hotelName) => {
         newsletter: data.newsletter,
         phone: data.phone,
         rooms: data.rooms,
+        date: dateToday,
       })
       setSuccessMessage(true);
       setTimeout(function() {
