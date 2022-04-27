@@ -37,12 +37,8 @@ export const getStaticProps = async () => {
       ...establishment.data(),
       docID,
       image_url: imageUrl,
-    
     });
-    
   }
-
-
 
   return {
     props: { 

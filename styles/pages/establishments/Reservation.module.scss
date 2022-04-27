@@ -28,10 +28,6 @@
       display: flex;
       margin: 0 5px;
 
-      .danger {
-        border: 1px solid $color-secondary;
-      }
-
       span {
         position: absolute;
         left: 7px;
@@ -58,6 +54,8 @@
       flex-wrap: wrap;
       justify-content: space-between;
       
+      
+
       .col {
         position: relative;
         width: 47%;
@@ -135,5 +133,35 @@
         width: 30px;
       }
     }
+
+    .message {
+      visibility: hidden;
+
+      p {
+        margin: 0;
+      }
+    }
+
+    .messageError {
+      visibility: visible;
+      margin-left: 5px;
+      
+      p {
+        color: $color-secondary;
+      }
+    }
+
+    .messageSuccess {
+      visibility: visible;
+      margin-left: 5px;
+
+      p {
+        color: $color-green;
+      }
+    }
   }
+}
+
+.danger {
+  border: 1px solid $color-secondary !important;
 }

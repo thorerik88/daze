@@ -140,7 +140,7 @@ const details = ({ item }) => {
               {item.dogs ? <li>Dogs allowed</li> : <li className={styles.danger}>Dogs not allowed</li>}
             </ul>
           </div>    
-          <Reservation />
+          <Reservation value={item.name}/>
         </div>
       </div>
     </Container>

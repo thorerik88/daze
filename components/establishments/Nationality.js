@@ -1,18 +1,20 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { NationalityContext } from '../../context/Context';
 import styles from '../../styles/pages/establishments/Nationality.module.scss';
 
 
-const Nationality = () => {
-
+const Nationality = (classValue) => {
+  
   const { nat, setNat } = useContext( NationalityContext );
   
+
+
   const handleNatChange = e => {
     setNat(e.target.value)
   }
 
   return ( 
-    <select name="nationality" className={styles.nationList} onChange={handleNatChange} value={nat}>
+    <select name="nationality" className={classValue ? styles.nationListError : styles.nationList} onChange={handleNatChange} value={nat}>
       <option value="">-- select one --</option>
       <option value="afghan">Afghan</option>
       <option value="albanian">Albanian</option>

@@ -42,3 +42,25 @@
   }
 }
 
+.danger {
+  border: 1px solid $color-secondary !important;
+}
+
+.message {
+  visibility: hidden;
+}
+
+.messageVisible {
+  visibility: visible;
+
+  .error {
+    visibility: visible;
+    color: $color-secondary;
+  }
+
+  .success {
+    color: $color-green;
+  }
+}
+
+

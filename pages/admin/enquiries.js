@@ -1,27 +1,32 @@
 
 import styles from '../../styles/components/reuse/AdminDash.module.scss';
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import Link from 'next/link';
+import Router from 'next/router';
 
 import Container from "../../components/layout/Container";
 import Head from "../../components/layout/Head";
 import MessageItems from "../../components/layout/MessageItems";
-import { load } from '../../storage/storage';
 import AdminDash from '../../components/layout/AdminDash';
 import TravelTips from '../../components/layout/TravelTips';
+import { AuthContext } from '../../context/Context';
 
 const Enquiries = () => {
 
-  useEffect(() => {
-    if (!load('token')) {
-      Router.push('/')
+    const redirect = () => {
+      useEffect(() => {
+        Router.push('/')
+      })
     }
-  })
+  
+  
+
+  const { auth } = useContext( AuthContext );
 
   return ( 
     <>
       <Head title={'Enquiries'} />
-      <Container>
+      {auth ? <Container>
         <ul className={styles.breadcrumbs}>
           <Link href='/admin'><li><a>admin</a></li></Link>
           <li>{'>'}</li>
@@ -37,7 +42,7 @@ const Enquiries = () => {
             <TravelTips />
           </div>
         </div>
-      </Container>
+      </Container> : redirect()}
     </>
    );
 }

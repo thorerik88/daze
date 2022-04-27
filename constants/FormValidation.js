@@ -8,7 +8,7 @@ export const FormValidation = (value, type) => {
   } else if (type === 'email') {
     regEx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   } else if (type === 'number') {
-    regEx = /\d{10}/;
+    regEx = /\d{7}/;
   }
 
   if (value.match(regEx)) {

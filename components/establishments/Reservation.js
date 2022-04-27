@@ -4,16 +4,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
 import Button from "../layout/Button";
-import Nationality from './Nationality';
-import { NationalityContext } from '../../context/Context';
+
+import Router from 'next/router'
 
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormValidation } from '../../constants/FormValidation';
 
+import { initializeApp } from "firebase/app";
+import { clientCredentials } from "../../firebaseConfig";
+import { doc, setDoc, collection, getFirestore } from "firebase/firestore";
+import { NavItem } from 'react-bootstrap';
 
-const Reservation = () => {
 
+
+const Reservation = (hotelName) => {
+  initializeApp(clientCredentials);
+  const db = getFirestore();  
+
+  // set initial states
   const [nat, setNat] = useState('');
   const [guests, setGuests] = useState(1);
   const [rooms, setRooms] = useState(1);
@@ -21,9 +30,13 @@ const Reservation = () => {
   const [nameError, setNameError] = useState(false);
   const [phoneError, setPhoneError] = useState(false);
   const [emailError, setEmailError] = useState(false);
+  const [checkinError, setCheckinError] = useState(false);
+  const [checkoutError, setCheckoutError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
+  const [successMessage, setSuccessMessage] = useState(false);
 
   // submit form
-  const { register, handleSubmit, setValue, formState: { errors } } = useForm({});
+  const { register, handleSubmit, setValue } = useForm({});
 
   useEffect(() => {
     console.log('guests: ' + guests, 'rooms: ' + rooms)
@@ -66,35 +79,60 @@ const Reservation = () => {
   }
 
   const onSubmit = (data) => {
-    let nationality = {'nationality': nat}
-    data = {...data, ...nationality}
     makeReservation(data);
   };
 
   
   const makeReservation = async (data) => {
+    // reset error
     setNameError(false);
     setPhoneError(false);
     setEmailError(false);
+    setCheckinError(false);
+    setCheckoutError(false);
+    setErrorMessage(false);
 
+    // Field validation
     let checkName = FormValidation(data.name, 'string');
     let checkPhone = FormValidation(data.phone, 'number');
     let checkEmail = FormValidation(data.email, 'email');
-
-    if (checkName && checkPhone && checkEmail) {
-      console.log(data)
+    
+    // submit data if OK
+    if (checkName && checkPhone && checkEmail && data.checkin && data.checkout) {
+      const newEnquiry = doc(collection(db, 'enquiries'))
+      await setDoc(newEnquiry, {
+        hotel_name: hotelName.value,
+        checkin: data.checkin,
+        checkout: data.checkout,
+        email: data.email,
+        guests: data.guests,
+        name: data.name,
+        newsletter: data.newsletter,
+        phone: data.phone,
+        rooms: data.rooms,
+      })
+      setSuccessMessage(true);
+      setTimeout(function() {
+        Router.push('/')
+      }, 3000)
+    } else {
+      setErrorMessage(true);
+      if (!checkName) {
+        setNameError(true);
+      }
+      if (!checkPhone) {
+        setPhoneError(true);
+      } 
+      if(!checkEmail) {
+        setEmailError(true);
+      }
+      if(!data.checkin) {
+        setCheckinError(true);
+      }
+      if(!data.checkout) {
+        setCheckoutError(true);
+      }
     }
-     
-    if (!checkName) {
-      setNameError(true);
-    }
-    if (!checkPhone) {
-      setPhoneError(true);
-    } 
-    if(!checkEmail) {
-      setEmailError(true);
-    }
-
   }
 
   return (   
@@ -115,11 +153,11 @@ const Reservation = () => {
         </div>
         <div className={styles.inputGroups}>
           <div className={styles.col}>
-            <input type='date' name='checkin' {...register('checkin')} />
+            <input className={checkinError ? styles.danger : ''} type='date' name='checkin' {...register('checkin')} />
             <span>Checkin</span>
           </div>
           <div className={styles.col}>
-            <input type='date' name='checkout' {...register('checkout')} />
+            <input className={checkoutError ? styles.danger : ''} type='date' name='checkout' {...register('checkout')} />
             <span>Checkout</span>
           </div>
         </div>
@@ -141,18 +179,24 @@ const Reservation = () => {
               </div>
           </div>
         </div>
-        <div className={styles.inputGroup}>
+        {/* <div className={styles.inputGroup}>
           <NationalityContext.Provider value={{ nat, setNat }}>
-            <Nationality />
+            <Nationality className={natError ? true : false} />
           </NationalityContext.Provider>
           <span>Nationality</span>
-        </div>
+        </div> */}
         <div className={styles.inputGroup}>
-              <div className={styles.checkboxes}>
-                <input id='newsletter' name='newsletter' type='checkbox' {...register('newsletter')}/>
-                <label htmlFor='newsletter'>Newsletter</label>
-              </div>
-            </div>
+          <div className={styles.checkboxes}>
+            <input id='newsletter' name='newsletter' type='checkbox' {...register('newsletter')}/>
+            <label htmlFor='newsletter'>Newsletter</label>
+          </div>
+        </div>
+        <div className={errorMessage ? styles.messageError : styles.message}>
+          <p>Required fields</p>
+        </div>
+        <div className={successMessage ? styles.messageSuccess : styles.message}>
+          <p>Enquiry successfully sent, redirection to home page</p>
+        </div>
         <Button value={'Make Reservation'} buttonType={'submit'}/>
       </div>
     </form>
