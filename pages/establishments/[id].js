@@ -92,28 +92,29 @@ const details = ({ item }) => {
     <Head title={'Details'} />
     <Container>
       <h1>Establishment details</h1>
-      <div className={styles.establishment}>
-        <div className={styles.heading}>
-          <div className={styles.name}>
-            <h2>{item.name}</h2>
+      
+      <div className={styles.wrapper}>
+        <div className={styles.establishment}>
+          <div className={styles.heading}>
+            <div className={styles.name}>
+              <h2>{item.name}</h2>
+            </div>
+            <div className={styles.price}>
+              <h2>{item.price} kr</h2>
+            </div>
           </div>
-          <div className={styles.price}>
-            <h2>{item.price} kr</h2>
+          <div className={styles.image}>
+            {<Image
+              loader={myLoader(item.image_url)}
+              src={item.image_url}
+              width={1000}
+              height={685}
+              responsive='true'
+              objectFit='contain'
+              alt={item.alt_text}
+            />}
           </div>
-        </div>
-        <div className={styles.image}>
-          {<Image
-            loader={myLoader(item.image_url)}
-            src={item.image_url}
-            width={1000}
-            height={685}
-            responsive='true'
-            objectFit='contain'
-            alt={item.alt_text}
-          />}
-        </div>
-        <div className={styles.textBox}>
-          
+          <div className={styles.textBox}>
             <div className={styles.description}>
               <div className={styles.descriptionHeader}>
                 <h2>Description</h2>
@@ -124,22 +125,23 @@ const details = ({ item }) => {
               </div>
               <p>{item.description}</p>
             </div>
-    
-          
-          <div className={styles.text}>
-            <div className={styles.address}>
-              <div className={styles.addressIcon}>
-                <FontAwesomeIcon icon={faLocationDot} />
-                <p>{item.street}</p>
+            <div className={styles.text}>
+              <div className={styles.address}>
+                <div className={styles.addressIcon}>
+                  <FontAwesomeIcon icon={faLocationDot} />
+                  <p>{item.street}</p>
+                </div>
+                <p>{item.zip} {item.town}</p>
               </div>
-              <p>{item.zip} {item.town}</p>
-            </div>
-            <ul className={styles.options}>
-              {item.breakfast ? <li>Breakfast Included</li> : <li className={styles.danger}>Breakfast not included</li>}
-              {item.cancelation ? <li>Free cancelation</li> : <li className={styles.danger}>Not free cancelation</li>}
-              {item.dogs ? <li>Dogs allowed</li> : <li className={styles.danger}>Dogs not allowed</li>}
-            </ul>
-          </div>    
+              <ul className={styles.options}>
+                {item.breakfast ? <li>Breakfast Included</li> : <li className={styles.danger}>Breakfast not included</li>}
+                {item.cancelation ? <li>Free cancelation</li> : <li className={styles.danger}>Not free cancelation</li>}
+                {item.dogs ? <li>Dogs allowed</li> : <li className={styles.danger}>Dogs not allowed</li>}
+              </ul>
+            </div>  
+          </div>  
+        </div>
+        <div className={styles.reservation}>
           <Reservation value={item.name}/>
         </div>
       </div>

@@ -11,11 +11,11 @@ import Router from 'next/router'
 
 import { initializeApp } from "firebase/app";
 import { clientCredentials } from "../firebaseConfig";
-import { doc, setDoc, collection, getFirestore } from "firebase/firestore";
+import { doc, setDoc, collection, getFirestore, Timestamp } from "firebase/firestore";
 import { useState } from 'react';
+import { date, timestamp } from '../constants/date';
 
 const Contact = () => {
-
   initializeApp(clientCredentials);
   const db = getFirestore();  
 
@@ -32,7 +32,7 @@ const Contact = () => {
   const { register, handleSubmit, setValue } = useForm({});
   const onSubmit = (data) => {
     sendMessage(data);
-  };
+  };  
 
   // handle submit data
   const sendMessage = async (data) => {
@@ -49,6 +49,10 @@ const Contact = () => {
     let statusMessages = [];
 
     // submit if validation is ok
+
+    let todaysDate = Math.round((new Date()).getTime() / 1000);
+    let currentTime = timestamp();
+
     if (checkName && checkEmail && data.subject && data.message) {
       const newMessage = doc(collection(db, 'contact'))
       await setDoc(newMessage, {
@@ -56,6 +60,8 @@ const Contact = () => {
         email: data.email,
         subject: data.subject,
         message: data.message,
+        date: todaysDate,
+        time: currentTime,
       })
       setSuccess(true);
       statusMessages.push('Your message has been sent, redirecting to homepage')

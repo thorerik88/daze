@@ -10,11 +10,11 @@ import Router from 'next/router'
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormValidation } from '../../constants/FormValidation';
+import { timestamp } from '../../constants/date';
 
 import { initializeApp } from "firebase/app";
 import { clientCredentials } from "../../firebaseConfig";
 import { doc, setDoc, collection, getFirestore } from "firebase/firestore";
-import { NavItem } from 'react-bootstrap';
 
 
 
@@ -97,11 +97,19 @@ const Reservation = (hotelName) => {
     let checkPhone = FormValidation(data.phone, 'number');
     let checkEmail = FormValidation(data.email, 'email');
     
-    let dateToday = new Date();
-    let day = String(dateToday.getDate()).padStart(2, '0');
-    let month = String(dateToday.getMonth() + 1).padStart(2, 0);
-    let year = dateToday.getFullYear();
-    dateToday = `${year}-${month}-${day}`;
+    let todaysDate = Math.round((new Date()).getTime() / 1000);
+    let currentTime = timestamp();
+
+    // make sure checkin is before checkouts
+    if (data.checkin > data.checkout) {
+      setCheckinError(true);
+      setCheckoutError(true)
+    } else {
+      setCheckinError(false)
+      setCheckoutError(false)
+    }
+      
+    
 
     // submit data if OK
     if (checkName && checkPhone && checkEmail && data.checkin && data.checkout) {
@@ -116,7 +124,8 @@ const Reservation = (hotelName) => {
         newsletter: data.newsletter,
         phone: data.phone,
         rooms: data.rooms,
-        date: dateToday,
+        date: todaysDate,
+        time: currentTime,
       })
       setSuccessMessage(true);
       setTimeout(function() {

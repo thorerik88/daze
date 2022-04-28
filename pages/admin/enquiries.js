@@ -1,6 +1,6 @@
 
 import styles from '../../styles/components/reuse/AdminDash.module.scss';
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import Link from 'next/link';
 
 import Login from '../login';
@@ -13,7 +13,7 @@ import { AuthContext } from '../../context/Context';
 import { initializeApp } from "firebase/app";
 import { clientCredentials } from "../../firebaseConfig";
 import { getDoc, doc, getDocs, collection ,getFirestore } from "firebase/firestore";
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { sortAndDate } from '../../constants/date';
 
 initializeApp(clientCredentials);
 const db = getFirestore();  
@@ -65,15 +65,20 @@ export const myLoader = async (id) => {
 const Enquiries = ({ enquiries }) => {
   const { auth } = useContext( AuthContext );
 
+  sortAndDate(enquiries)
+  
+
   const [enquiry, setEnquiry] = useState([]);
 
-  const handleClick = e => {
+  const handleClick = async e => {
     let id = e.target.dataset.id
-    let list = myLoader(id)
-    setEnquiry(list)
+    let list = await myLoader(id)
+    setEnquiry(list.props.item)
   }
 
-  console.log(enquiry)
+  if(enquiry.length === 1) {
+    sortAndDate(enquiry)
+  }
 
   return ( 
     <>
@@ -101,24 +106,55 @@ const Enquiries = ({ enquiries }) => {
                     <div key={item.docID} className={styles.item}>
                       <p data-id={`${item.docID}`} onClick={handleClick}>{item.name}</p>
                       <p>{item.rooms}</p>
-                      <p>{item.checkin}</p>
+                      <p>{item.newDate}</p>
                     </div>)
                   })}
-              </div>
-              <div className={styles.details}>
-                <h1>Enquiry</h1>
-                <h2>Name: Thor-Erik</h2>
-                <p><strong>Date: 2022.04.27</strong></p>
-                <p><strong>Hotel Name: Zander K</strong></p>
-                <p>Phone: 47474747</p>
-                <p>Email: thorerik88@hotmail.com</p>
-                <p>Checkin: 2022.04.30</p>
-                <p>Checkout: 2022.05.01</p>
-                <p>Guests: 4</p>
-                <p>Rooms: 2</p>
-                <p>Wants newsletters</p>
-            </div>
-            <TravelTips />
+                </div>
+                {enquiry ? enquiry.map(item => {
+                  return (
+                    <div key={'1'} className={styles.details}>
+                      <h1>Enquiry</h1>
+                      <div className={styles.detailsItem}>
+                        <p>Name:</p>
+                        <p>{item.name}</p>
+                      </div>
+                      <div className={styles.detailsItem}>
+                        <p>Enquiry Sent:</p>
+                        <p>{item.newDate} {item.time}</p>
+                      </div>
+                      <div className={styles.detailsItem}>
+                        <p>Hotel Name:</p>
+                        <p>{item.hotel_name}</p>
+                      </div>
+                      <div className={styles.detailsItem}>
+                        <p>Phone:</p>
+                        <p>{item.phone}</p>
+                      </div>
+                      <div className={styles.detailsItem}>
+                        <p>Email:</p>
+                        <p>{item.email}</p>
+                      </div>
+                      <div className={styles.detailsItem}>
+                        <p>Checkin / Checkout:</p>
+                        <p>{item.checkin} / {item.checkout}</p>
+                      </div>
+                      <div className={styles.detailsItem}>
+                        <p>Guests:</p>
+                        <p>{item.guests}</p>
+                      </div>
+                      <div className={styles.detailsItem}>
+                        <p>Rooms:</p>
+                        <p>{item.rooms}</p>
+                      </div>
+                      <div className={styles.detailsItem}>
+                        <p>Newsletter</p>
+                        {item.newsletter ? <p>Yes</p> : <p>No</p>}
+                      </div>
+                    </div>
+                  )
+                }) : ''}
+                
+              <TravelTips />
           </div>
         </div>
       </Container> 
