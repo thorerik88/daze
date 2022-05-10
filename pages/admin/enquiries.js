@@ -79,10 +79,6 @@ const Enquiries = ({ enquiries }) => {
     sortAndDate(enquiry)
   }
 
-  useEffect(() => {
-    console.log(window.location.pathname)
-  })
-
   return ( 
     <>
       <Head title={'Enquiries'} />
