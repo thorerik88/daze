@@ -1,6 +1,6 @@
 
 import styles from '../../styles/components/reuse/AdminDash.module.scss';
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Link from 'next/link';
 
 import Login from '../login';
@@ -19,7 +19,7 @@ initializeApp(clientCredentials);
 const db = getFirestore();  
 
 export const getStaticProps = async () => {
-  
+
   const colRef = collection(db, 'enquiries');
   const snapshot = await getDocs(colRef);
   const enquiries = [];
@@ -67,7 +67,6 @@ const Enquiries = ({ enquiries }) => {
 
   sortAndDate(enquiries)
   
-
   const [enquiry, setEnquiry] = useState([]);
 
   const handleClick = async e => {
@@ -79,6 +78,10 @@ const Enquiries = ({ enquiries }) => {
   if(enquiry.length === 1) {
     sortAndDate(enquiry)
   }
+
+  useEffect(() => {
+    console.log(window.location.pathname)
+  })
 
   return ( 
     <>

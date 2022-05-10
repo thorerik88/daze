@@ -28,6 +28,10 @@
       padding: 40px 0;
       max-width: 80%;
   
+      .icon {
+        padding-right: 4px;
+      }
+
       .inputs {
         display: flex;
         flex-direction: column;

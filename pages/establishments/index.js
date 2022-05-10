@@ -51,7 +51,7 @@ const establishments = ({ establishments }) => {
   const myLoader = ({ src }) => {
     return src
   }
-  console.log(establishments)
+  
   return ( 
     <>
       <Head title={'Establishments'} />

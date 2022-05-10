@@ -59,11 +59,11 @@ const Login = () => {
             <div className={styles.formWrapper}>
               <div className={styles.inputs}>
                 <div className={styles.username}>
-                  <FontAwesomeIcon icon={faAt} />
+                  <FontAwesomeIcon className={styles.icon} icon={faAt} />
                   <input type='text' name='email' placeholder='Email' {...register('email')}/>
                 </div>
                 <div className={styles.password}>
-                  <FontAwesomeIcon icon={faLock} />
+                  <FontAwesomeIcon className={styles.icon} icon={faLock} />
                   <input type='password' name='password' placeholder='Password' {...register('password')} />
                 </div>
               </div>

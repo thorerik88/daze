@@ -45,7 +45,7 @@
             padding: 2px 10px;
           }
   
-          h2 {
+          h2:last-child {
             display: inline;
             padding-left: 5px;
           }
@@ -58,6 +58,7 @@
   
       .text {
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
         
   
@@ -79,9 +80,19 @@
         .options {
           color: $color-green;
           list-style-type: initial;
+          padding-left: 20px;
+          margin-top: 15px;
   
           .danger {
             color: $color-secondary;
+          }
+        }
+
+        @include tablet-portrait {
+          flex-direction: row;
+
+          .options {
+            margin-top: 0;
           }
         }
       }

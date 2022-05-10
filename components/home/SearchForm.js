@@ -32,6 +32,9 @@ const SearchForm = ({ ...establishments }) => {
 
   return ( 
     <div className={styles.formWrapper}>
+      <div className={styles.heading}>
+          <h1>Find your hotel today</h1>  
+      </div>        
       <form className={styles.form}>
         <div className={styles.searchWrap}>
           <FontAwesomeIcon className={styles.icon} icon={faBed} />
@@ -47,7 +50,7 @@ const SearchForm = ({ ...establishments }) => {
             })}
           </ul>
         </div>
-        <Button value={'Search'} buttonType={'submit'} type='button'/>
+        {/* <Button value={'Search'} buttonType={'submit'} type='button'/> */}
       </form>
     </div>
    );
