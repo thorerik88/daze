@@ -105,5 +105,34 @@
         }
       }
     }
+    .message {
+      visibility: hidden;
+
+      p {
+        margin: 0;
+      }
+    }
+
+    .messageError {
+      visibility: visible;
+      margin-left: 5px;
+      
+      p {
+        color: $color-secondary;
+      }
+    }
+
+    .messageSuccess {
+      visibility: visible;
+      margin-left: 5px;
+
+      p {
+        color: $color-green;
+      }
+    }
   }
+}
+
+.danger {
+  border: 1px solid $color-secondary !important;
 }

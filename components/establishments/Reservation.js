@@ -23,7 +23,6 @@ const Reservation = (hotelName) => {
   const db = getFirestore();  
 
   // set initial states
-  const [nat, setNat] = useState('');
   const [guests, setGuests] = useState(1);
   const [rooms, setRooms] = useState(1);
 
@@ -195,12 +194,6 @@ const Reservation = (hotelName) => {
               </div>
           </div>
         </div>
-        {/* <div className={styles.inputGroup}>
-          <NationalityContext.Provider value={{ nat, setNat }}>
-            <Nationality className={natError ? true : false} />
-          </NationalityContext.Provider>
-          <span>Nationality</span>
-        </div> */}
         <div className={styles.inputGroup}>
           <div className={styles.checkboxes}>
             <input id='newsletter' name='newsletter' type='checkbox' {...register('newsletter')}/>
