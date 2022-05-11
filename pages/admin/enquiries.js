@@ -75,6 +75,8 @@ const Enquiries = ({ enquiries }) => {
     setEnquiry(list.props.item)
   }
 
+  console.log(enquiry)
+
   if(enquiry.length === 1) {
     sortAndDate(enquiry)
   }

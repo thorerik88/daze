@@ -29,7 +29,7 @@ export const sortAndDate = (list) => {
     let day = newDate.getDate();
     let month = newDate.getMonth();
     let year = newDate.getFullYear();
-    newDate = {newDate: `${day}/${month}/${year}`};
+    newDate = {newDate: `${day}/${month+1} - ${year}`};
     const newObject = Object.assign(item, newDate);
     return newObject;
   })

@@ -38,7 +38,6 @@ const Reservation = (hotelName) => {
   const { register, handleSubmit, setValue } = useForm({});
 
   useEffect(() => {
-    console.log('guests: ' + guests, 'rooms: ' + rooms)
     setValue('guests', guests)
     setValue('rooms', rooms)
   }, [rooms, guests])
@@ -107,7 +106,6 @@ const Reservation = (hotelName) => {
       setCheckinError(false)
       setCheckoutError(false)
     }
-      
     
 
     // submit data if OK
