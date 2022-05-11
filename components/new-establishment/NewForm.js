@@ -51,7 +51,7 @@ const NewForm = () => {
 
 
     // check if all information is present
-    if (data.name && data.price && data.street && data.zip && data.town && data.description && data.rating && data.file.length > 0) {
+    if (data.name && data.price && data.street && data.zip && data.town && data.description && data.rating && data.alt_text && data.file.length > 0) {
 
       // save image referenace to storage
       const storage = getStorage()
@@ -78,6 +78,7 @@ const NewForm = () => {
         breakfast: data.breakfast,
         dogs: data.dogs,
         cancelation: data.cancelation,
+        alt_text: data.alt_text,
       })
       setSuccessMessage(true);
       setTimeout(function() {
