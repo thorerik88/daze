@@ -3,12 +3,14 @@
 .hero {
   margin-bottom: 280px;
   
+  
   .bgWrapper {
     position: absolute;
     top: 36px + 70px;
     height: 60vh;
     max-height: 440px;
     width: 100vw;
+    max-width: 100%;
     overflow: hidden;
     z-index: -1;
   }

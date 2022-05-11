@@ -11,14 +11,18 @@ const Button = ({ value, buttonType, icon, linkData }) => {
     <div className={buttonType === 'submit' ? styles.submit : styles.book}>
       {icon ? 
         <div className={styles.buttonWrapper}>
-          <div className={styles.iconBg}>
-            <FontAwesomeIcon className={styles.icon} icon={ faBellConcierge } />
-          </div>
-          <div className={styles.button}>
-            <Link href={'/establishments/' + linkData} key={linkData}>
-            <a>{value}</a>
-            </Link>
-          </div>
+          <Link href={'/establishments/' + linkData} key={linkData}>
+          <a>
+            <div className={styles.iconBg}>
+              <FontAwesomeIcon className={styles.icon} icon={ faBellConcierge } />
+            </div>
+            <div className={styles.button}>
+              
+              <span>{value}</span>
+              
+            </div>
+          </a>
+          </Link>
         </div>
         :
         <div>
