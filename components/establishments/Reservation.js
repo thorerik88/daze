@@ -67,11 +67,11 @@ const Reservation = (hotelName) => {
   const handleIncrement = (e) => {
     let button = e.currentTarget.dataset.name;
     if (button === 'guests') {
-      if (guests < 8 ) {
+      if (guests < 9 ) {
         setGuests(prevCount => prevCount + 1)
       }
     } else if (button === 'rooms') {
-      if (rooms < 8) {
+      if (rooms < 9) {
         setRooms(prevCount => prevCount + 1)
       }
     }
