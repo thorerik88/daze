@@ -36,7 +36,8 @@ export const getStaticProps = async () => {
   return {
     props: { 
       enquiries: enquiries,
-    }
+    },
+    revalidate: 10,
   }
 
 }
@@ -75,11 +76,13 @@ const Enquiries = ({ enquiries }) => {
     setEnquiry(list.props.item)
   }
 
-  console.log(enquiry)
-
   if(enquiry.length === 1) {
     sortAndDate(enquiry)
   }
+
+  useEffect(() => {
+    setMenuBorder('enquiry')
+  })
 
   return ( 
     <>
