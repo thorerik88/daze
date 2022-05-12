@@ -2,7 +2,7 @@
 
 .hero {
   position: relative;
-  margin-bottom: 200px;
+  margin-bottom: 250px;
   
   .bgWrapper {
     position: absolute;
@@ -16,6 +16,6 @@
   }
 
   @include tablet-landscape {
-    margin-bottom: 250px;
+    // margin-bottom: 250px;
   }
 }
