@@ -1,7 +1,6 @@
 @import '../../global/variables.module.scss';
 
 .hero {
-  // margin-bottom: 280px;
   position: relative;
   
   .bgWrapper {
@@ -13,5 +12,9 @@
     max-width: 100%;
     overflow: hidden;
     z-index: -1;
+  }
+
+  @include tablet-landscape {
+    margin-bottom: 280px;
   }
 }
