@@ -1,9 +1,7 @@
 @import '../../global/variables.module.scss';
 
 .formWrapper {
-  // margin: 50px auto;
-  max-width: 430px;
-  margin: 0 auto;
+  margin: 50px auto;
   padding: 0 0 30px;
   background-color: $color-bg;
   width: 90%;
@@ -23,14 +21,10 @@
     }
   }
 
-  // @include tablet-portrait {
-  //   max-width: 430px;
-  //   margin: 50px auto 100px;
-  // }
-
-  // @include tablet-landscape {
-  //   margin: 90px auto 230px;
-  // }
+  @include tablet-portrait {
+    max-width: 430px;
+    margin-top: 50px;
+  }
 
   .form {
     display: flex;
