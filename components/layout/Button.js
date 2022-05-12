@@ -25,8 +25,10 @@ const Button = ({ value, buttonType, icon, linkData }) => {
           </Link>
         </div>
         :
-        <div>
-          <input type={buttonType} value={value} />
+        <div className={styles.buttonWrapper}>
+          <a>
+            <input type={buttonType} value={value} />
+          </a>
         </div>
       }
     </div>
