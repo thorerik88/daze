@@ -97,7 +97,7 @@ const establishments = ({ establishments }) => {
                   </ul> */}
                 </div>    
                 <div className={styles.button}>
-                  <Button value={'BOOK'} buttonType={'book'} icon={'fa-bell'} type='button' linkData={item.docID} />
+                  <Button value={'Book'} buttonType={'book'} icon={'fa-bell'} type='button' linkData={item.docID} />
                 </div>
               </div>
             </div>
