@@ -39,7 +39,6 @@
   
       // upload section
       .upload {
-        
   
         input[type='file'] {
           border: none;
@@ -57,6 +56,10 @@
           color: white;
           padding: 7px;
           font-weight: 700;
+        }
+
+        input:hover {
+          cursor: pointer;
         }
       }
   
