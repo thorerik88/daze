@@ -34,12 +34,11 @@ export const getStaticProps = async () => {
   
 
   return {
-    props: { 
-      enquiries: enquiries,
+    props: {
+      enquiries,
     },
     revalidate: 10,
   }
-
 }
 
 export const getDocument = async (id) => {
@@ -80,9 +79,9 @@ const Enquiries = ({ enquiries }) => {
     sortAndDate(enquiry)
   }
 
-  useEffect(() => {
-    setMenuBorder('enquiry')
-  })
+  // useEffect(() => {
+  //   setMenuBorder('enquiry')
+  // })
 
   return ( 
     <>
