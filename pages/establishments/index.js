@@ -90,11 +90,11 @@ const establishments = ({ establishments }) => {
                     </div>
                     <p>{item.zip} {item.town}</p>
                   </div>
-                  <ul className={styles.options}>
+                  {/* <ul className={styles.options}>
                     {item.breakfast ? <li>Breakfast Included</li> : <li className={styles.hiddenListItem}>Dogs</li>}
                     {item.cancelation ? <li>Free cancelation</li> : <li className={styles.hiddenListItem}>Dogs</li>}
                     {item.dogs ? <li>Dogs allowed</li> : <li className={styles.hiddenListItem}>Dogs</li>}
-                  </ul>
+                  </ul> */}
                 </div>    
                 <div className={styles.button}>
                   <Button value={'BOOK'} buttonType={'book'} icon={'fa-bell'} type='button' linkData={item.docID} />
