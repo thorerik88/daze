@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faCircle } from '@fortawesome/free-solid-svg-icons';
 import { useState, useContext, useEffect } from "react";
 import Image from 'next/image';
 import Link from 'next/link';
@@ -64,17 +64,23 @@ const NavBar = () => {
             <span>At your service</span>
           </div>
         </Link>
+        
         <div className={styles.navMenu}>
-          {/* <FontAwesomeIcon data='admin' className={styles.admin} onClick={() => handleClick('admin')} icon={faUser} /> */}
-          <FontAwesomeIcon className={styles.mobileMenu} onClick={() => handleClick()} icon={faBars} />
+          <MobileMenuContext.Provider value={{ toggle }}>
+            <CloseMenuContext.Provider value={{ setToggle }}>
+              <MobileMenu value={dataset} />
+              <DesktopMenu value={dataset} />
+            </CloseMenuContext.Provider>
+          </MobileMenuContext.Provider>
+            {auth ? 
+              <div className={styles.loggedIn}>
+                <FontAwesomeIcon className={styles.userIcon} icon={faCircle} />
+                <p>Logged in</p>
+              </div>
+            : ''}
+            <FontAwesomeIcon className={styles.mobileMenu} onClick={() => handleClick()} icon={faBars} />
         </div>
       </Container>
-      <MobileMenuContext.Provider value={{ toggle }}>
-        <CloseMenuContext.Provider value={{ setToggle }}>
-          <MobileMenu value={dataset} />
-          <DesktopMenu value={dataset} />
-        </CloseMenuContext.Provider>
-      </MobileMenuContext.Provider>
     </nav>
   );
 }
