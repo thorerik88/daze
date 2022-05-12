@@ -116,7 +116,7 @@ const Enquiries = ({ enquiries }) => {
                 {enquiry ? enquiry.map(item => {
                   return (
                     <div key={'1'} className={styles.details}>
-                      <h1>Enquiry</h1>
+                      <h1>{item.name}</h1>
                       <div className={styles.detailsItem}>
                         <p>Name:</p>
                         <p>{item.name}</p>

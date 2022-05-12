@@ -1,8 +1,8 @@
 @import '../../global/variables.module.scss';
 
 .hero {
-  margin-bottom: 280px;
-  
+  margin-bottom: 80px;
+  padding-top: 30px;
   
   .bgWrapper {
     position: absolute;
@@ -13,5 +13,9 @@
     max-width: 100%;
     overflow: hidden;
     z-index: -1;
+
+    @include tablet-portrait {
+      margin-bottom: 150px;
+    }
   }
 }

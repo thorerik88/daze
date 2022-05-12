@@ -54,7 +54,7 @@ const Login = () => {
           <form className={styles.form} name='login' onSubmit={handleSubmit(loginVal)}>
             <div className={styles.heading}>
             <FontAwesomeIcon icon={faLock} />
-              <h2>ADMIN LOGIN</h2>
+              <h2>Admin Login</h2>
             </div>
             <div className={styles.formWrapper}>
               <div className={styles.inputs}>
