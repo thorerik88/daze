@@ -5,7 +5,7 @@ import NewForm from '../../components/new-establishment/NewForm';
 import AdminDash from '../../components/layout/AdminDash';
 import TravelTips from '../../components/layout/TravelTips';
 
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import Link from 'next/link';
 import { AuthContext } from '../../context/Context';
 import Login from '../login';

@@ -11,9 +11,9 @@ import Router from 'next/router'
 
 import { initializeApp } from "firebase/app";
 import { clientCredentials } from "../firebaseConfig";
-import { doc, setDoc, collection, getFirestore, Timestamp } from "firebase/firestore";
+import { doc, setDoc, collection, getFirestore } from "firebase/firestore";
 import { useState } from 'react';
-import { date, timestamp } from '../constants/date';
+import { timestamp } from '../constants/date';
 
 const Contact = () => {
   initializeApp(clientCredentials);

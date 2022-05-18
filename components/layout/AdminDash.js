@@ -10,6 +10,7 @@ const AdminDash = () => {
   const [isMessages, setIsMessages] = useState(false);
   const [isNewEst, setIsNewEst] = useState(false);
 
+  // style links based on current page
   useEffect(() => {
     if (window.location.pathname == '/admin/enquiries') {
       setIsEnquiry(true);

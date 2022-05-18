@@ -76,6 +76,7 @@ const Reservation = (hotelName) => {
     }
   }
 
+  // submit data
   const onSubmit = (data) => {
     makeReservation(data);
   };
@@ -128,6 +129,7 @@ const Reservation = (hotelName) => {
       setTimeout(function() {
         Router.push('/')
       }, 3000)
+      // set individual error effects
     } else {
       setErrorMessage(true);
       if (!checkName) {

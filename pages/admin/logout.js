@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { logOut, remove } from "../../storage/storage"
+import { remove } from "../../storage/storage"
 
 const Logout = ()=> {
   useEffect(() => {

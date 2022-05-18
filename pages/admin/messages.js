@@ -63,11 +63,8 @@ export const myLoader = async (id) => {
 
 
 const Messages = ({ messages }) => {
-  
-  // sort array by date
-  
 
-  // create date to display
+  // sort and create date to display
   sortAndDate(messages)
   
   

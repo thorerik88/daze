@@ -6,7 +6,6 @@ import '../styles/global/globals.scss'
 import Layout from '../components/layout/Layout';
 import { AuthContext } from '../context/Context';
 import { useState } from "react";
-import { load } from "../storage/storage";
 
 function MyApp({ Component, pageProps }) {
 

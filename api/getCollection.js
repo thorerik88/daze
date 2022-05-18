@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { clientCredentials } from "../firebaseConfig";
-import { getDoc, doc, getDocs, collection ,getFirestore } from "firebase/firestore";
+import { getDocs, collection ,getFirestore } from "firebase/firestore";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
 export const getStaticProps = async () => {
