@@ -44,7 +44,7 @@ const Reservation = (hotelName) => {
 
   // change input value on decrement
   const handleDecrement = (e) => {
-    let button = e.currentTarget.dataset.name;
+    const button = e.currentTarget.dataset.name;
     if (button === 'guests') {
       if (guests < 2) {
         setGuests(1)
@@ -61,10 +61,10 @@ const Reservation = (hotelName) => {
       }
     }
   }
-  // change input value on increment
 
+  // change input value on increment
   const handleIncrement = (e) => {
-    let button = e.currentTarget.dataset.name;
+    const button = e.currentTarget.dataset.name;
     if (button === 'guests') {
       if (guests < 9 ) {
         setGuests(prevCount => prevCount + 1)
@@ -92,14 +92,14 @@ const Reservation = (hotelName) => {
     setErrorMessage(false);
 
     // Field validation
-    let checkName = FormValidation(data.name, 'string');
-    let checkPhone = FormValidation(data.phone, 'number');
-    let checkEmail = FormValidation(data.email, 'email');
+    const checkName = FormValidation(data.name, 'string');
+    const checkPhone = FormValidation(data.phone, 'number');
+    const checkEmail = FormValidation(data.email, 'phone');
     
-    let todaysDate = Math.round((new Date()).getTime() / 1000);
-    let currentTime = timestamp();
+    const todaysDate = Math.round((new Date()).getTime() / 1000);
+    const currentTime = timestamp();
 
-    // make sure checkin is before checkouts
+    // make sure checkin is before checkout
     if (data.checkin > data.checkout) {
       setCheckinError(true);
       setCheckoutError(true)
@@ -129,6 +129,7 @@ const Reservation = (hotelName) => {
       setTimeout(function() {
         Router.push('/')
       }, 3000)
+      
       // set individual error effects
     } else {
       setErrorMessage(true);

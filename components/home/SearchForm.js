@@ -4,7 +4,6 @@ import { faBed } from '@fortawesome/free-solid-svg-icons';
 
 import Link from 'next/link';
 
-import Button from '../layout/Button';
 import { useState } from 'react';
 
 const SearchForm = ({ ...establishments }) => {
@@ -50,7 +49,6 @@ const SearchForm = ({ ...establishments }) => {
             })}
           </ul>
         </div>
-        {/* <Button value={'Search'} buttonType={'submit'} type='button'/> */}
       </form>
     </div>
    );

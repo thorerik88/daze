@@ -9,7 +9,7 @@ import Link from 'next/link';
 
 const MobileMenu = (listObject) => {
   
-  let listItems = listObject.value;  
+  const listItems = listObject.value;  
 
   // open mobile menu based on icon type
   const { toggle } = useContext(MobileMenuContext);
@@ -19,7 +19,7 @@ const MobileMenu = (listObject) => {
 
   // close mobile menu, when page is changed
   const changePageClick = (e) => {
-    let element = e.target.tagName;
+    const element = e.target.tagName;
     if (element === 'A') {
       setToggle(false)
     }

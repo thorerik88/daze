@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { clientCredentials } from "../../firebaseConfig";
-import { getDoc, doc, getDocs, collection ,getFirestore } from "firebase/firestore";
+import { getDocs, collection ,getFirestore } from "firebase/firestore";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
 initializeApp(clientCredentials);
@@ -16,7 +16,7 @@ export const getEstablishments = async () => {
   for await (let establishment of snapshot.docs) {
     const imageRef = ref(storage, establishment.data().image_url);
     const imageUrl = await getDownloadURL(imageRef);
-    let docID = establishment.id;
+    const docID = establishment.id;
     establishments.push({
       ...establishment.data(),
       docID,

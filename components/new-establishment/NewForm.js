@@ -61,7 +61,7 @@ const NewForm = () => {
       // save file to storage
       const storageRef = ref(storage, imageRef)
       uploadBytes(storageRef, data.file[0]).then((snapshot) => {
-        console.log(snapshot)
+        return snapshot
       })
 
       // save data to establishments
@@ -82,8 +82,9 @@ const NewForm = () => {
       })
       setSuccessMessage(true);
       setTimeout(function() {
-        Router.push('/admin/new-establishment')
+        Router.reload(window.location.pathname)
       }, 3000)
+      alert("Success! New establishment added.")
     } else {
       setErrorMessage(true);
       if (!data.name) {
@@ -152,7 +153,7 @@ const NewForm = () => {
               <span>Description</span>
             </div>
             <div className={styles.inputGroup}>
-              <input className={ratingError ? styles.danger : ''} type='number' step='0.1' name='rating' {...register('rating')} />
+              <input className={ratingError ? styles.danger : ''} type='number' name='rating' {...register('rating')} />
               <span>Rating (1-10)</span>
             </div>
             <div className={styles.inputGroup}>
@@ -186,7 +187,7 @@ const NewForm = () => {
               <p>Required fields</p>
             </div>
             <div className={successMessage ? styles.messageSuccess : styles.message}>
-              <p>New establishment successfully added, redirecting</p>
+              <p>New establishment successfully added, refreshing</p>
             </div>
             <Button value={'Submit New'} buttonType={'submit'}/>
           </div>

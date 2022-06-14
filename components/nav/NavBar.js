@@ -6,7 +6,6 @@ import Link from 'next/link';
 
 import styles from '../../styles/components/nav/NavBar.module.scss';
 
-
 import { navLogo } from '../../constants/Images';
 import { Container } from "react-bootstrap";
 import MobileMenu from "./MobileMenu";
@@ -17,7 +16,7 @@ import { load } from "../../storage/storage";
 
 const NavBar = () => {
 
-  const { auth, setAuth } = useContext( AuthContext );
+  const { auth } = useContext( AuthContext );
 
   const [toggle, setToggle] = useState(false);
   const [dataset, setDataset] = useState([]);

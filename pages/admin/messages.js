@@ -1,6 +1,6 @@
 import styles from '../../styles/components/reuse/AdminDash.module.scss';
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import Link from 'next/link';
 
 import Login from '../login';

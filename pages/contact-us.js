@@ -36,7 +36,6 @@ const Contact = () => {
 
   // handle submit data
   const sendMessage = async (data) => {
-    console.log(data)
     setNameError(false);
     setEmailError(false);
     setSubjectError(false);

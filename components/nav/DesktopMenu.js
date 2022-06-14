@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const DesktopMenu = (listObject) => {
 
-  let listItems = listObject.value;
+  const listItems = listObject.value;
   return ( 
     <div className={styles.menuWrapper}>
       <ul className={styles.menu}>
@@ -14,8 +14,7 @@ const DesktopMenu = (listObject) => {
                       <a>{item.name}</a>
                     </Link>
                 </li>
-              })}
-        {/* {auth ? <li></li>} */}
+          })}
       </ul>
     </div> );
 }

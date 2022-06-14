@@ -4,17 +4,14 @@ import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
 import Head from '../../components/layout/Head';
 import Container from '../../components/layout/Container';
-import Button from '../../components/layout/Button';
 import Reservation from '../../components/establishments/Reservation';
 
 import Image from 'next/image';
-// import { Wrapper, Status } from '@googlemaps/react-wrapper';
 
 import { initializeApp } from "firebase/app";
 import { clientCredentials } from "../../firebaseConfig";
 import { getDoc, doc, getDocs, collection ,getFirestore } from "firebase/firestore";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-// import { useRef, useState, useEffect } from 'react';
 
 
 initializeApp(clientCredentials);
